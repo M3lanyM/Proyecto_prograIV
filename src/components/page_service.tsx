@@ -1,8 +1,13 @@
+import Link from "next/link"
+
 const Page_services = ({ }) => {
     return (
         <section className="parcel-services">
             <div className="Row">
-                <a className="service-titles" href="#"> Cotización de  precios</a>
+            <Link href="/indexReports" className="service-titles">Cotización de  precios
+              </Link>
+
+                {/*<a className="service-titles" href="#"> Cotización de  precios</a>*/}
                 <p className="text-cost">
                     Estime el costo de envió de sus paquetes en función<br />
                     de la ruta, el peso y el volumen.
