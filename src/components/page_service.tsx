@@ -18,7 +18,7 @@ const Page_services = ({ }) => {
             <div className="Row">
                 <a className="service-titles2" href="#"> Seguimiento de paquetes </a>
                 <p className="text-track" >
-                    Conoce la información del estado actual del envio
+                    Conoce la información del estado actual del envio-
                     <img className = "service-img2" src="/paquete.png"/>
                 </p>
             </div>
