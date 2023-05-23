@@ -9,7 +9,7 @@ const Page_services = ({ }) => {
 
                 {/*<a className="service-titles" href="#"> Cotización de  precios</a>*/}
                 <p className="text-cost">
-                    Estime el costo de envió de sus paquetes en función<br />
+                    Estime el costo de envio de sus paquetes en función<br />
                     de la ruta, el peso y el volumen.
                     <img className = "service-img" src="/cotizacion.png"/>
                 </p>
