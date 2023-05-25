@@ -48,7 +48,7 @@ const PackageTracking: React.FC = () => {
                                     <thead>
                                         <tr className="tr-track">
                                             <th className="th-track">Fecha</th>
-                                            <th className="th-track">Descripcion </th>
+                                            <th className="th-track ">Descripcion </th>
                                         </tr>
                                     </thead>
                                     <tbody>
