@@ -20,7 +20,7 @@ const PackageTracking: React.FC = () => {
                     <button className="Rowtrack" onClick={handlerPart}>Rastrear</button>
                     {part && (
                         <section className="grid grid-cols-1 gap-4">
-                            <div >
+                            <div>
                             <div className="contener">
                                 <div className="circleRegistered">
                                     <img src="/img/mercaderia.png" alt="Mercaderia" />

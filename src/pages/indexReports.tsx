@@ -12,13 +12,17 @@ export default function indexReports() {
                 
                 <div className="report-container">
                     <DatePicker></DatePicker>
-                    <label className="selecct-route">Selecciona una ruta:</label>
+
+                    <DatePicker></DatePicker>
+
+                    <label className="option-route">Selecciona una ruta:</label>
                     <select className="route-report">
                         <option value="">--Selecciona una opción--</option>
                         <option value="San José">San José</option>
                         <option value="Cartago">Cartago</option>
                         <option value="Heredia">Heredia</option>
                     </select>
+                    <button className="report-button" > Filtrar </button>
                 </div>
 
                 <div>
