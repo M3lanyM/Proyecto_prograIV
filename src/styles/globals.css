@@ -74,13 +74,12 @@ body {
 .Row {
   background-color: #D9D9D9;
   width: 90%;
-  margin: 15px;
+  margin: 10px;
   padding: 20px;
   border-radius: 10px;
   -webkit-box-shadow: 0px 3px 5px 2px rgba(51, 51, 51, 1);
   -moz-box-shadow: 0px 3px 5px 2px rgba(51, 51, 51, 1);
   box-shadow: 0px 3px 5px 2px rgba(51, 51, 51, 1);
-
 }
 
 .service-titles {
@@ -136,3 +135,40 @@ body {
   margin-top: -7%;
 }
 
+@media (max-width:700px) {
+  .parcel-services {
+    display: flex;
+    flex-direction: column;
+    margin-left: 4%;
+    margin-top: 4px;
+  }
+
+  .service-img {
+    width: 90px;
+    height: auto;
+    margin-left: 70%;
+    margin-top: 5%;
+  }
+
+  .service-titles2 {
+    color: #284B63;
+    font-weight: bold;
+    font-size: 22px;
+    margin-left: 0%;
+  }
+
+  .service-img3 {
+    width: 110px;
+    height: auto;
+    margin-left: 70%;
+    margin-top: -7%;
+  }
+
+  .service-img2 {
+    width: 110px;
+    height: auto;
+    margin-left: 12%;
+    margin-top: 6%;
+  }
+
+}
