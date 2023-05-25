@@ -15,7 +15,7 @@ export default function Home() {
       </header>
       <section className="parcel-services">
         <div className="Row">
-          <Link href="#" className="service-titles">Cotización de  precios
+          <Link href="/indexPrice" className="service-titles">Cotización de  precios
           </Link>
 
           {/*<a className="service-titles" href="#"> Cotización de  precios</a>*/}
