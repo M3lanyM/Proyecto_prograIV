@@ -57,7 +57,7 @@ export default function IndexPrice() {
                 </section>
                 <div>
                     <button className="Row" onClick={handlerPrice}>Calcular</button>
-                    <p>el precio es de: {result} colones</p>
+                    <p>El precio es de: {result} colones</p>
                     <button className="Row" onClick={handlerPart}>Datos Personales</button>
                 </div>
                 {/*Personal*/}
