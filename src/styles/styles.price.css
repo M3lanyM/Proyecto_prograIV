@@ -15,4 +15,7 @@
     #Price section{
         all:unset;
     }
+    .header {
+        flex-direction: column;
+    }
 }
