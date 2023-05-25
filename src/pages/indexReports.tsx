@@ -1,3 +1,4 @@
+import DatePicker from "@/components/calendar"
 import Page_footer from "@/components/page_footer"
 import Page_header from "@/components/page_header"
 
@@ -5,9 +6,19 @@ export default function indexReports() {
     return (
         <>
             <header>
-                <Page_header></Page_header>
+                <Page_header />
             </header>
             <section>
+                <DatePicker></DatePicker>
+                <div>
+                    <label className="selecct-route">Selecciona una ruta:</label>
+                    <select className="route-report">
+                        <option value="">--Selecciona una opción--</option>
+                        <option value="San José">San José</option>
+                        <option value="Cartago">Cartago</option>
+                        <option value="Heredia">Heredia</option>
+                    </select>
+                </div>
                 <div>
                     <table className="table-reports">
                         <thead>
@@ -36,7 +47,7 @@ export default function indexReports() {
                 </div>
             </section>
             <footer>
-                <Page_footer></Page_footer>
+                <Page_footer />
             </footer>
         </>
     )

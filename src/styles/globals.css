@@ -25,7 +25,8 @@ body {
   background-color: #3C6E71; 
   height: 50px;
   color: #FFFFFF;
-  margin-top: auto;
+  margin-top: 20%;
+  margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;
 }
@@ -196,4 +197,23 @@ font-size: 16px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/*CSS DEL CALENDARIO*/
+.date-picker-container {
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+}
+
+.date-picker-input {
+  background-color: #284B63;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.date-picker-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
