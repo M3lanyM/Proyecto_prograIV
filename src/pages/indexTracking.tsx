@@ -14,7 +14,7 @@ const PackageTracking: React.FC = () => {
             <header>
                 <Page_header />
             </header>
-            <section>
+            <section className="min-h-screen">
                 <input className="code" type="text" placeholder="Código" />
                 <div>
                     <button className="Rowtrack" onClick={handlerPart}>Rastrear</button>
