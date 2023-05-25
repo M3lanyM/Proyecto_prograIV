@@ -20,8 +20,28 @@ const PackageTracking: React.FC = () => {
                     <button className="Rowtrack" onClick={handlerPart}>Rastrear</button>
                     {part && (
                         <section className="grid grid-cols-1 gap-4">
-                            <div className="circle" />
-                            <table className="table-reports">
+                            <div >
+                            <div className="contener">
+                                <div className="circleRegistered">
+                                    <img src="/img/mercaderia.png" alt="Mercaderia" />
+                                </div>
+                                <label form="registered">Mercaderia Registrada</label>
+                            </div>
+                            <div className="contener">
+                                <div className="circleProcess">
+                                <img src="/img/transito.png" alt="En Transito" />
+                                </div>
+                                <label form="process">En transito</label>
+                            </div>
+                            <div className="contener">
+                                <div className="circleDelivered">
+                                <img src="/img/entregado.png" alt="Entregado" />
+                                </div>
+                                <label form="delivered">Entregado</label>
+                            </div>
+                            </div>
+                            
+                            <table className="table-track">
                                 <thead>
                                     <tr className="tr-reports">
                                         <th className="th-reports">Fecha</th>
@@ -41,7 +61,7 @@ const PackageTracking: React.FC = () => {
                 </div>
             </section>
             <footer >
-                <Page_footer></Page_footer>
+                <Page_footer/>
             </footer>
         </>
     );
