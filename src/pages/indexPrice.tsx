@@ -27,7 +27,7 @@ export default function IndexPrice() {
             <header>
                 <Page_header />
             </header>
-            <div className="min-h-screen flex flex-col justify-center items-center">
+            <div id="Price" className="min-h-screen flex flex-col justify-center items-center">
                 <section className="grid grid-cols-2 gap-4">
                     <div>
                         <label form="weight">Ingrese el peso:</label>
