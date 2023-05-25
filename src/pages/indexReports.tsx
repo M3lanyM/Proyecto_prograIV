@@ -8,7 +8,7 @@ export default function indexReports() {
             <header>
                 <Page_header />
             </header>
-            <section>
+            <section className="min-h-screen ">
                 <DatePicker></DatePicker>
                 <div>
                     <label className="selecct-route">Selecciona una ruta:</label>

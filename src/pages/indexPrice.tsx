@@ -27,9 +27,8 @@ export default function IndexPrice() {
             <header>
                 <Page_header />
             </header>
-            <section className="min-h-screen">
-                {/*Price*/}
-                <div className="grid grid-cols-2 gap-4">
+            <div className="min-h-screen flex flex-col justify-center items-center">
+                <section className="grid grid-cols-2 gap-4">
                     <div>
                         <label form="weight">Ingrese el peso:</label>
                         <input className="m-4" type="number"
@@ -49,41 +48,43 @@ export default function IndexPrice() {
                         <label form="Route">Seleccione la Ruta:</label>
                         <select className="m-4"
                             value={input4} onChange={(e) => setInput4(e.target.value)}>
+                            <option value="Seleccion">Seleccione una ruta</option>
                             <option value="SanJose">San Jose</option>
                             <option value="PasoCanoas">Paso Canoas</option>
                             <option value="Neily">Neily</option>
                         </select>
                     </div>
-                </div>
+                </section>
                 <div>
                     <button className="Row" onClick={handlerPrice}>Calcular</button>
                     <p>el precio es de: {result} colones</p>
                     <button className="Row" onClick={handlerPart}>Datos Personales</button>
-                    {part && (
-                        <section className="grid grid-cols-1 gap-4">
-                            <div>
-                                <label form="name">Nombre:</label>
-                                <input className="m-4" type="text" placeholder="Ingrese su nombre" />
-                            </div>
-                            <div>
-                                <label form="lastname">Apellido:</label>
-                                <input className="m-4" type="text" placeholder="Ingrese su apellido" />
-                            </div>
-                            <div>
-                                <label form="email">Email:</label>
-                                <input className="m-4" type="email" placeholder="Ingrese su correo electrónico" />
-                            </div>
-                            <div>
-                                <label form="phonenumber">Teléfono:</label>
-                                <input className="m-4" type="tel" placeholder="Ingrese su número de teléfono" />
-                            </div>
-                            <div>
-                                <button className="Row" >Generar Factura</button>
-                            </div>
-                        </section>
-                    )}
                 </div>
-            </section>
+                {/*Personal*/}
+                {part && (
+                    <section className="grid grid-cols-1 gap-4">
+                        <div>
+                            <label form="name">Nombre:</label>
+                            <input className="m-4" type="text" placeholder="Ingrese su nombre" />
+                        </div>
+                        <div>
+                            <label form="lastname">Apellido:</label>
+                            <input className="m-4" type="text" placeholder="Ingrese su apellido" />
+                        </div>
+                        <div>
+                            <label form="email">Email:</label>
+                            <input className="m-4" type="email" placeholder="Ingrese su correo electrónico" />
+                        </div>
+                        <div>
+                            <label form="phonenumber">Teléfono:</label>
+                            <input className="m-4" type="tel" placeholder="Ingrese su número de teléfono" />
+                        </div>
+                        <div>
+                            <button className="Row" >Generar Factura</button>
+                        </div>
+                    </section>
+                )}
+            </div>
             <footer >
                 <Page_footer />
             </footer>

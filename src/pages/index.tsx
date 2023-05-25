@@ -13,7 +13,7 @@ export default function Home() {
       <header>
         <Page_header></Page_header>
       </header>
-      <section className="parcel-services">
+      <section className="parcel-services min-h-screen flex flex-col justify-center items-center">
         <div className="Row">
           <Link href="/indexPrice" className="service-titles">Cotización de  precios
           </Link>
