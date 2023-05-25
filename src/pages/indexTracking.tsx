@@ -43,15 +43,15 @@ const PackageTracking: React.FC = () => {
                             
                             <table className="table-track">
                                 <thead>
-                                    <tr className="tr-reports">
-                                        <th className="th-reports">Fecha</th>
-                                        <th className="th-reports">Descripcion </th>
+                                    <tr className="tr-track">
+                                        <th className="th-track">Fecha</th>
+                                        <th className="th-track">Descripcion </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr className="tr-reports">
-                                        <td className="td-reports" data-label="Fecha">Dato 1</td>
-                                        <td className="td-reports" data-label="E/S">Dato 2</td>
+                                    <tr className="tr-track">
+                                        <td className="td-track" data-label="Fecha">Dato 1</td>
+                                        <td className="td-track" data-label="E/S">Dato 2</td>
                                     </tr>
                                 </tbody>
                             </table>
