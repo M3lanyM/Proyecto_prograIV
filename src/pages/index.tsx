@@ -27,7 +27,7 @@ export default function Home() {
         </div>
 
         <div className="Row">
-        <Link className="service-titles2" href="#"> Seguimiento de paquetes </Link>
+        <Link className="service-titles2" href="/indexTracking"> Seguimiento de paquetes </Link>
           <p className="text-track" >
             Conoce la información del estado actual del envio
             <img className="service-img2" src="/img/paquete.png" />
