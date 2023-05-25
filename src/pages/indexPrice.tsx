@@ -62,11 +62,11 @@ export default function IndexPrice() {
                     {part && (
                         <section className="grid grid-cols-1 gap-4">
                             <div>
-                                <label form="nombre">Nombre:</label>
+                                <label form="name">Nombre:</label>
                                 <input className="m-4" type="text" placeholder="Ingrese su nombre" />
                             </div>
                             <div>
-                                <label form="apellido">Apellido:</label>
+                                <label form="lastname">Apellido:</label>
                                 <input className="m-4" type="text" placeholder="Ingrese su apellido" />
                             </div>
                             <div>
@@ -74,7 +74,7 @@ export default function IndexPrice() {
                                 <input className="m-4" type="email" placeholder="Ingrese su correo electrónico" />
                             </div>
                             <div>
-                                <label form="telefono">Teléfono:</label>
+                                <label form="phonenumber">Teléfono:</label>
                                 <input className="m-4" type="tel" placeholder="Ingrese su número de teléfono" />
                             </div>
                             <div>
