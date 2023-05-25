@@ -13,12 +13,10 @@ export default function Home() {
       <header>
         <Page_header></Page_header>
       </header>
-      <section className="parcel-services min-h-screen flex flex-col justify-center items-center">
+      <section className="parcel-services min-h-screen flex flex-col justify-center ">
         <div className="Row">
           <Link href="/indexPrice" className="service-titles">Cotización de  precios
           </Link>
-
-          {/*<a className="service-titles" href="#"> Cotización de  precios</a>*/}
           <p className="text-cost">
             Estime el costo de envio de sus paquetes en función<br />
             de la ruta, el peso y el volumen.
@@ -27,7 +25,7 @@ export default function Home() {
         </div>
 
         <div className="Row">
-        <Link className="service-titles2" href="/indexTracking"> Seguimiento de paquetes </Link>
+          <Link className="service-titles2" href="/indexTracking"> Seguimiento de paquetes </Link>
           <p className="text-track" >
             Conoce la información del estado actual del envio
             <img className="service-img2" src="/img/paquete.png" />
@@ -35,7 +33,7 @@ export default function Home() {
         </div>
 
         <div className="Row">
-        <Link className="service-titles" href="/indexReports"> Reportes </Link>
+          <Link className="service-titles" href="/indexReports"> Reportes </Link>
           <p className="text-pack">
             Mira tu historial de paquetes enviados y recibidos
             <img className="service-img3" src="/img/reporte.png" />

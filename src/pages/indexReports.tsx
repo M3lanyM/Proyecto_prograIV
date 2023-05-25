@@ -8,9 +8,10 @@ export default function indexReports() {
             <header>
                 <Page_header />
             </header>
-            <section className="min-h-screen ">
-                <DatePicker></DatePicker>
-                <div>
+            <section className="min-h-screen">
+                
+                <div className="report-container">
+                    <DatePicker></DatePicker>
                     <label className="selecct-route">Selecciona una ruta:</label>
                     <select className="route-report">
                         <option value="">--Selecciona una opción--</option>
@@ -19,6 +20,7 @@ export default function indexReports() {
                         <option value="Heredia">Heredia</option>
                     </select>
                 </div>
+
                 <div>
                     <table className="table-reports">
                         <thead>
