@@ -13,6 +13,11 @@ export default function Home() {
       <header>
         <Page_header></Page_header>
       </header>
+
+      <nav className="nav-home">
+        <h1 className="company-name">Buses Universidad Nacional </h1>
+      </nav>
+
       <section className="parcel-services min-h-screen  ">
         <div className="Row">
           <Link href="/indexPrice" className="service-titles">Cotización de  precios

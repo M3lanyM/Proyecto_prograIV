@@ -11,16 +11,15 @@ const PageHeader = () => {
 
   return (
     <header className="header">
+      
       <div className="logo">
-        <img src="/img/autobus.png" alt="Logo de empresa" />
-        {/*<h1 className="company-name">Nombre de la empresa </h1>*/}
+        <img src="/img/autobus.png" alt="Logo de empresa"/>
       </div>
-
       <nav>
         <ul className="nav-links">
           <li><a href="#" onClick={handleInicioLinkClick}>Inicio</a></li>
-          <li><Link href="/acerca-de">Acerca de</Link></li>
-          <li><Link href="/contacto">Contáctenos</Link></li>
+          <li><Link href="#">Acerca de</Link></li>
+          <li><Link href="#">Contáctenos</Link></li>
         </ul>
       </nav>
     </header>
