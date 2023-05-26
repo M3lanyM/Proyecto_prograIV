@@ -147,6 +147,62 @@
   box-shadow: 0 4px 8px rgba(15, 170, 218, 0.2);
   margin-left: 5%;
 }
+/* Estilos adicionales para dispositivos móviles */
+
+/* Contenedor principal del calendario en dispositivos móviles */
+@media (max-width: 600px) {
+  .date-picker-container {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 0;
+  }
+}
+
+/* Input del calendario en dispositivos móviles */
+@media (max-width: 600px) {
+  .date-picker-input {
+    width: 100%;
+  }
+}
+
+/* Contenedor para las opciones en dispositivos móviles */
+@media (max-width: 600px) {
+  .report-container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* Etiquetas */
+@media (max-width: 600px) {
+  .labels-div {
+    flex-direction: column;
+  }
+
+  .label1-report,
+  .label2-report {
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 5px;
+    font-size: 15px;
+    padding: 5%;
+  }
+}
+
+/* Botón */
+@media (max-width: 600px) {
+  .report-button {
+    width: 100%;
+    margin-top: 5%;
+  }
+}
+
+/* Opciones*/
+@media (max-width: 600px) {
+  .route-report {
+    width: 100%;
+  }
+}
 
 /*nav*/
 .nav-report {
@@ -167,4 +223,21 @@
   width: 170px;
   height: 170px;
   margin: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-report {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2%;
+  }
+  
+  .title-nav {
+    font-size: 30px;
+  }
+  
+  .nav-img {
+    max-width: 120px;
+    max-height: 120px;
+  }
 }

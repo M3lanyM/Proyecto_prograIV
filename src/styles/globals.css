@@ -213,12 +213,30 @@ body {
 
 @keyframes glowingText {
   0% {
-    text-shadow: 0 0 2px #284B63, 0 0 5px #284B63, 0 0 10px #284B63;
+    text-shadow: 0 0 2px #284B63, 0 0 3px #284B63, 0 0 10px #284B63;
   }
   50% {
-    text-shadow: 0 0 2px #3C6E71, 0 0 5px #3C6E71, 0 0 10px #3C6E71;
+    text-shadow: 0 0 2px #3C6E71, 0 0 3px #3C6E71, 0 0 10px #3C6E71;
   }
   100% {
-    text-shadow: 0 0 2px #284B63, 0 0 5px #284B63, 0 0 10px #284B63;
+    text-shadow: 0 0 2px #284B63, 0 0 3px #284B63, 0 0 10px #284B63;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .nav-home {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2%;
+  }
+
+  .company-name {
+    font-size: 32px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .nav-home {
+    margin-top: 2%;
   }
 }

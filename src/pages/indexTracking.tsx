@@ -21,7 +21,7 @@ const PackageTracking: React.FC = () => {
                     {part && (
                         <section id="principalTrack" className="items-center">
 
-                            <div className='parteabajo'>
+                            <div className='downstairs'>
                                 <div className="justify-center items-center">
                                     <div className="containerTrack">
 
