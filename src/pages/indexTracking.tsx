@@ -14,21 +14,21 @@ const PackageTracking: React.FC = () => {
             <header>
                 <Page_header />
             </header>
-            <section className="min-h-screen items-center">
+            <section id="principalTrack" className="min-h-screen items-center">
                 <input className="code" type="text" placeholder="Código" />
-                <div>
+                <div >
                     <button className="Rowtrack" onClick={handlerPart}>Rastrear</button>
                     {part && (
-                        <section className="grid grid-cols-1 gap-4">
+                        <section className="items-center">
 
-                            <div className="items-center">
+                            <div className='parteabajo'>
                                 <div className="justify-center items-center">
                                     <div className="containerTrack">
 
                                         <div className="circleRegistered">
                                             <img src="/img/mercaderia.png" alt="Mercaderia" />
                                         </div>
-                                        <label form="registered">Mercaderia Registrada</label>
+                                        <label form="registered">Registrado</label>
                                     </div>
                                     <div className="containerTrack">
                                         <div className="circleProcess">
