@@ -12,10 +12,10 @@ export default function indexReports() {
             <nav className="nav-report">
                 <div>
                     <h1 className="title-nav">
-                        Cierre de ventas 
+                        Cierre de ventas
                         <img className="nav-img" src="/img/movimientos.png" alt="error" />
                     </h1>
-                    
+
                 </div>
             </nav>
 
@@ -24,7 +24,7 @@ export default function indexReports() {
                     <label className="label1-report">Movimientos por fecha</label>
                     <label className="label2-report">Movimientos por ruta</label>
                 </div>
-                
+
                 <div className="report-container">
                     <DatePicker></DatePicker>
                     <DatePicker></DatePicker>
@@ -68,9 +68,14 @@ export default function indexReports() {
                 </div>
             </section>
             <footer>
-            <div className="footer">
-                <h2>Contactenos: </h2>
-            </div>
+                <div className="footer">
+                    <p className="inf-footer">Contactenos: <br />
+                        Correo electrónico: info@busesUNA.com<br />
+                        Teléfono: +1234567890<br />
+                        Dirección:  Canoas, Puntarenas, Costa Rica.<br />
+                    </p>
+                    <h1 className="copyright"> © 2023 </h1>
+                </div>
             </footer>
         </>
     )
