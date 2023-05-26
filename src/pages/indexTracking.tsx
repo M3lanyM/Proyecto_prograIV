@@ -14,12 +14,12 @@ const PackageTracking: React.FC = () => {
             <header>
                 <Page_header />
             </header>
-            <section id="principalTrack" className="min-h-screen items-center">
+            <section  className="min-h-screen items-center">
                 <input className="code" type="text" placeholder="Código" />
                 <div >
                     <button className="Rowtrack" onClick={handlerPart}>Rastrear</button>
                     {part && (
-                        <section className="items-center">
+                        <section id="principalTrack" className="items-center">
 
                             <div className='parteabajo'>
                                 <div className="justify-center items-center">
