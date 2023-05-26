@@ -5,117 +5,166 @@
 /*Tabla de reportes*/
 
 .table-reports {
-    width: 75%;
-    border-collapse: collapse;
-    margin: 10% auto auto auto;
-  
-  }
-  
+  width: 75%;
+  border-collapse: collapse;
+  margin: 5% auto 15% auto;
+  background-color: white;
+  box-shadow: 0 4px 8px 4px rgba(39, 103, 122, 0.2);
+}
+
+.th-reports,
+.td-reports {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #284B63;
+  font-family: 'Josefin Sans';
+  font-size: 16px;
+}
+
+.th-reports {
+  color: #FFFFFF;
+  background-color: #353535;
+}
+
+
+.tr-reports:hover {
+  background-color: #284B63;
+}
+
+@media (max-width: 600px) {
+
+  .table-reports,
+  thead,
+  tbody,
   .th-reports,
-  .td-reports {
-    padding: 8px;
-    text-align: center;
-    border: 1px solid #000000;
-    font-family: 'Josefin Sans';
-    font-size: 16px;
-  }
-  
-  .th-reports {
-    color: #FFFFFF;
-  }
-  
-  .th-reports {
-    background-color: #284B63;
-  }
-  
-  .tr-reports:hover {
-    background-color: #f5f5f5;
-  }
-  
-  @media (max-width: 600px) {
-  
-    .table-reports,
-    thead,
-    tbody,
-    .th-reports,
-    .td-reports,
-    .tr-reports {
-      display: block;
-    }
-  
-    thead .tr-reports {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-    }
-  
-    .td-reports {
-      border: none;
-      position: relative;
-      padding-left: 50%;
-    }
-  
-    td:before {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: 45%;
-      padding-right: 10px;
-      white-space: nowrap;
-      content: attr(data-label);
-      font-weight: bold;
-    }
-  
+  .td-reports,
+  .tr-reports {
+    display: block;
   }
 
-  
+  thead .tr-reports {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .td-reports {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .td-reports:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    content: attr(data-label);
+    font-weight: bold;
+  }
+
+}
+
+
 /*CSS DEL CALENDARIO*/
 .date-picker-container {
-    display: flex;
-    align-items: center;
-    color: #FFFFFF;
-  }
-  
-  .date-picker-input {
-    background-color: #284B63;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .date-picker-input::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-  }
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  margin-left: 3%;
 
-  /*contenedor para opciones*/
+}
 
-.report-container{
-    display: flex;
-    background-color: #D9D9D9;
-    width: 70%;
-    padding: 2%;
-    border-radius: 5px;
-    -webkit-box-shadow: 0px 3px 5px 2px rgba(51, 51, 51, 1);
-    -moz-box-shadow: 0px 3px 5px 2px rgba(51, 51, 51, 1);
-    box-shadow: 0px 3px 5px 2px rgba(51, 51, 51, 1);
-  
-  }
-  
-  .report-button {
-    background-color: #3C6E71;
-    color: white;
-    padding: 5px 15px;
-    font-size: 18px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-  }
-  
-  .report-button:hover {
-    background-color: #3C6E71;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
+.date-picker-input {
+  background-color: #284B63;
+  padding: 10% 10%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.date-picker-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/*contenedor para opciones*/
+.report-container {
+  display: flex;
+  margin-left: 22%;
+  margin-top: 3%;
+}
+
+.labels-div{
+  margin-top: 3%;
+}
+.label1-report {
+  font-size: 22px;
+  font-weight: bold;
+  color: #353535;
+  margin-left: 27%;
+}
+
+.label2-report {
+  font-size: 22px;
+  font-weight: bold;
+  color: #353535;
+  margin-left: 6%;
+}
+
+/*boton de filtrar*/
+.report-button {
+  background-color: #353535;
+  color: white;
+  padding: 5px 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-left: 4%;
+}
+
+.report-button:hover {
+  background-color: #353535;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/*opciones de ruta*/
+.route-report {
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #D9D9D9;
+  color: #353535;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  border: 2px solid #284B63;
+  box-shadow: 0 4px 8px rgba(15, 170, 218, 0.2);
+  margin-left: 5%;
+}
+
+/*nav*/
+.nav-report {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #ccc;
+  background: linear-gradient(to top, #ccc, transparent);
+  padding-bottom: 1%;
+  margin-top: 1%;
+}
+
+.title-nav {
+  font-size: 40px;
+  font-weight: bold;
+  color: #284B63;
+}
+.nav-img{
+  width: 170px;
+  height: 170px;
+  margin: auto;
+}

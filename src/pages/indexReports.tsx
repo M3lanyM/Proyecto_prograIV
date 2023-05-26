@@ -8,23 +8,38 @@ export default function indexReports() {
             <header>
                 <Page_header />
             </header>
-            <section className="min-h-screen">
+
+            <nav className="nav-report">
+                <div>
+                    <h1 className="title-nav">
+                        Cierre de ventas 
+                        <img className="nav-img" src="/img/movimientos.png" alt="error" />
+                    </h1>
+                    
+                </div>
+            </nav>
+
+            <article>
+                <div className="labels-div">
+                    <label className="label1-report">Movimientos por fecha</label>
+                    <label className="label2-report">Movimientos por ruta</label>
+                </div>
                 
                 <div className="report-container">
                     <DatePicker></DatePicker>
-
                     <DatePicker></DatePicker>
 
-                    <label className="option-route">Selecciona una ruta:</label>
                     <select className="route-report">
-                        <option value="">--Selecciona una opción--</option>
+                        <option value="">Selecciona una ruta</option>
                         <option value="San José">San José</option>
                         <option value="Cartago">Cartago</option>
                         <option value="Heredia">Heredia</option>
                     </select>
                     <button className="report-button" > Filtrar </button>
                 </div>
+            </article>
 
+            <section className="">
                 <div>
                     <table className="table-reports">
                         <thead>
@@ -53,7 +68,9 @@ export default function indexReports() {
                 </div>
             </section>
             <footer>
-                <Page_footer />
+            <div className="footer">
+                <h2>Contactenos: </h2>
+            </div>
             </footer>
         </>
     )

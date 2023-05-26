@@ -27,26 +27,27 @@ export default function IndexPrice() {
             <header>
                 <Page_header />
             </header>
+
             <div id="Price" className="min-h-screen flex flex-col justify-center items-center">
-                <section className="grid grid-cols-2 gap-4">
+                <section className="container-price grid grid-cols-2 gap-4">
                     <div>
-                        <label form="weight">Ingrese el peso:</label>
-                        <input className="m-4" type="number"
+                        <label className="label1-price" form="weight">Ingrese el peso:</label>
+                        <input className="input1-price m-4" type="number"
                             value={input1} onChange={(e) => setInput1(parseInt(e.target.value))} placeholder="Kg" />
                     </div>
                     <div>
-                        <label form="height">Ingrese la altura:</label>
-                        <input className="m-4" type="number"
+                        <label className="label1-price" form="height">Ingrese la altura:</label>
+                        <input className="input1-price m-4" type="number"
                             value={input2} onChange={(e) => setInput2(parseInt(e.target.value))} placeholder="H" />
                     </div>
                     <div>
-                        <label form="width">Ingrese el ancho:</label>
-                        <input className="m-4" type="number"
+                        <label className="label1-price" form="width">Ingrese el ancho:</label>
+                        <input className=" input1-price m-4" type="number"
                             value={input3} onChange={(e) => setInput3(parseInt(e.target.value))} placeholder="W" />
                     </div>
                     <div>
-                        <label form="Route">Seleccione la Ruta:</label>
-                        <select className="m-4"
+                        <label className="label1-price" form="Route">Seleccione la Ruta:</label>
+                        <select className="Select-Rout m-4"
                             value={input4} onChange={(e) => setInput4(e.target.value)}>
                             <option value="Seleccion">Seleccione una ruta</option>
                             <option value="SanJose">San Jose</option>
@@ -56,31 +57,32 @@ export default function IndexPrice() {
                     </div>
                 </section>
                 <div>
-                    <button className="Row" onClick={handlerPrice}>Calcular</button>
-                    <p>El precio es de: {result} colones</p>
-                    <button className="Row" onClick={handlerPart}>Datos Personales</button>
+                    <button className="button-price" onClick={handlerPrice}>Calcular</button>
+                    <p className="result-price">El precio es de: {result} colones</p>
+                    <button className="button-personal" onClick={handlerPart}>Datos Personales</button>
                 </div>
+
                 {/*Personal*/}
                 {part && (
-                    <section className="grid grid-cols-1 gap-4">
+                    <section className="container-personal grid grid-cols-1 gap-4">
                         <div>
-                            <label form="name">Nombre:</label>
-                            <input className="m-4" type="text" placeholder="Ingrese su nombre" />
+                            <label className="label1-price" form="name">Nombre:</label>
+                            <input className="input2-price m-4" type="text" placeholder="Ingrese su nombre" />
                         </div>
                         <div>
-                            <label form="lastname">Apellido:</label>
-                            <input className="m-4" type="text" placeholder="Ingrese su apellido" />
+                            <label className="label1-price" form="lastname">Apellido:</label>
+                            <input className="input2-price m-4" type="text" placeholder="Ingrese su apellido" />
                         </div>
                         <div>
-                            <label form="email">Email:</label>
-                            <input className="m-4" type="email" placeholder="Ingrese su correo electrónico" />
+                            <label className="label1-price" form="email">Email:</label>
+                            <input className="input2-price m-4" type="email" placeholder="Ingrese su correo electrónico" />
                         </div>
                         <div>
-                            <label form="phonenumber">Teléfono:</label>
-                            <input className="m-4" type="tel" placeholder="Ingrese su número de teléfono" />
+                            <label className="label1-price" form="phonenumber">Teléfono:</label>
+                            <input className="input2-price m-4" type="tel" placeholder="Ingrese su número de teléfono" />
                         </div>
                         <div>
-                            <button className="Row" >Generar Factura</button>
+                            <button className="Generate-bill" >Generar Factura</button>
                         </div>
                     </section>
                 )}
