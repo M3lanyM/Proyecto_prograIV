@@ -1,6 +1,7 @@
-import DatePicker from "@/components/calendar"
+import DatePicker from "@/components/function/calendar"
 import Page_footer from "@/components/page_footer"
 import Page_header from "@/components/page_header"
+import Tablereports from "@/components/function/reportsTable"
 
 export default function indexReports() {
     return (
@@ -39,44 +40,20 @@ export default function indexReports() {
                 </div>
             </article>
 
-            <section className="">
-                <div>
-                    <table className="table-reports">
-                        <thead>
-                            <tr className="tr-reports">
-                                <th className="th-reports">Fecha</th>
-                                <th className="th-reports">E/S</th>
-                                <th className="th-reports">Ruta </th>
-                                <th className="th-reports">Código </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr className="tr-reports">
-                                <td className="td-reports" data-label="Fecha">Dato 1</td>
-                                <td className="td-reports" data-label="E/S">Dato 2</td>
-                                <td className="td-reports" data-label="Ruta">Dato 3</td>
-                                <td className="td-reports" data-label="Código">Dato 3</td>
-                            </tr>
-                            <tr className="tr-reports">
-                                <td className="td-reports" data-label="Fecha">Dato 4</td>
-                                <td className="td-reports" data-label="E/S">Dato 5</td>
-                                <td className="td-reports" data-label="Ruta">Dato 6</td>
-                                <td className="td-reports" data-label="Código">Dato 7</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <section>
+                <Tablereports></Tablereports>
             </section>
-            <footer>
-                <div className="footer">
-                    <p className="inf-footer">Contactenos: <br />
-                        Correo electrónico: info@busesUNA.com<br />
-                        Teléfono: +1234567890<br />
-                        Dirección:  Canoas, Puntarenas, Costa Rica.<br />
-                    </p>
-                    <h1 className="copyright"> © 2023 </h1>
-                </div>
-            </footer>
+
+                <footer>
+                    <div className="footer">
+                        <p className="inf-footer">Contactenos: <br />
+                            Correo electrónico: info@busesUNA.com<br />
+                            Teléfono: +1234567890<br />
+                            Dirección:  Canoas, Puntarenas, Costa Rica.<br />
+                        </p>
+                        <h1 className="copyright"> © 2023 </h1>
+                    </div>
+                </footer>
         </>
     )
 }

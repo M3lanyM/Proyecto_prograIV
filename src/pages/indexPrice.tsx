@@ -1,4 +1,4 @@
-import { calculate } from "@/components/funtion/calculateprice";
+import { calculate } from "@/components/function/calculateprice";
 import Page_footer from "@/components/page_footer"
 import Page_header from "@/components/page_header"
 import React, { useState } from "react";
