@@ -1,9 +1,34 @@
-import DatePicker from "@/components/function/calendar"
-import Page_footer from "@/components/page_footer"
-import Page_header from "@/components/page_header"
-import Tablereports from "@/components/function/reportsTable"
+import { useEffect, useState } from "react";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "@/firebase/app";
+import DatePicker from "@/components/function/calendar";
+import Page_footer from "@/components/page_footer";
+import Page_header from "@/components/page_header";
+import Tablereports from "@/components/function/reportsTable";
 
 export default function indexReports() {
+    const [rutaOptions, setRutaOptions] = useState<string[]>([]);
+    const [selectedRuta, setSelectedRuta] = useState<string>("");
+
+    useEffect(() => {
+        const fetchRutaOptions = async () => {
+            const app = initializeApp(firebaseConfig);
+            const database = getFirestore(app);
+
+            const prueba2db = await getDocs(collection(database, "prueba2"));
+            const prueba2Data = prueba2db.docs.map((doc) => doc.data().ruta);
+
+            setRutaOptions(prueba2Data);
+        };
+
+        fetchRutaOptions();
+    }, []);
+
+    const handleRutaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedRuta(event.target.value);
+    };
+
     return (
         <>
             <header>
@@ -16,7 +41,6 @@ export default function indexReports() {
                         Cierre de ventas
                         <img className="nav-img" src="/img/movimientos.png" alt="error" />
                     </h1>
-
                 </div>
             </nav>
 
@@ -27,33 +51,36 @@ export default function indexReports() {
                 </div>
 
                 <div className="report-container">
-                    <DatePicker></DatePicker>
-                    <DatePicker></DatePicker>
+                    <DatePicker />
+                    <DatePicker />
 
-                    <select className="route-report">
+                    <select className="route-report" onChange={handleRutaChange}>
                         <option value="">Selecciona una ruta</option>
-                        <option value="San José">San José</option>
-                        <option value="Cartago">Cartago</option>
-                        <option value="Heredia">Heredia</option>
+                        {rutaOptions.map((ruta) => (
+                            <option key={ruta} value={ruta}>
+                                {ruta}
+                            </option>
+                        ))}
                     </select>
-                    <button className="report-button" > Filtrar </button>
+                    <button className="report-button">Filtrar</button>
                 </div>
             </article>
 
             <section>
-                <Tablereports></Tablereports>
+                <Tablereports selectedRuta={selectedRuta} />
             </section>
 
-                <footer>
-                    <div className="footer">
-                        <p className="inf-footer">Contactenos: <br />
-                            Correo electrónico: info@busesUNA.com<br />
-                            Teléfono: +1234567890<br />
-                            Dirección:  Canoas, Puntarenas, Costa Rica.<br />
-                        </p>
-                        <h1 className="copyright"> © 2023 </h1>
-                    </div>
-                </footer>
+            <footer>
+                <div className="footer">
+                    <p className="inf-footer">
+                        Contactenos: <br />
+                        Correo electrónico: info@busesUNA.com<br />
+                        Teléfono: +1234567890<br />
+                        Dirección: Canoas, Puntarenas, Costa Rica.<br />
+                    </p>
+                    <h1 className="copyright">© 2023</h1>
+                </div>
+            </footer>
         </>
-    )
+    );
 }

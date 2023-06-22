@@ -1,39 +1,51 @@
-import React, { FormEvent, useEffect, useState } from "react";
-import "firebase/firestore";
-import "firebase/compat/firestore";
+import React, { useEffect, useState } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
-import database from "@/firebase/app";
-import firebaseConfig from "@/firebase/app";
 import { initializeApp } from "firebase/app";
+import firebaseConfig from "@/firebase/app";
 
-const Tablereports = () => {
+interface TablereportsProps {
+    selectedRuta: string;
+}
+
+const Tablereports = ({ selectedRuta }: TablereportsProps) => {
     const [id, setId] = useState("");
     const [fecha, setFecha] = useState("");
     const [es, setES] = useState("");
-    const [ruta, setRuta] = useState("");
     const [codigo, setCodigo] = useState("");
     const [reportsData, setReportsData] = useState<any[]>([]);
 
-    const app = initializeApp(firebaseConfig);
-
-    const database = getFirestore(app);
-
     useEffect(() => {
         const fetchData = async () => {
-            const database = getFirestore();
+            const app = initializeApp(firebaseConfig);
+            const database = getFirestore(app);
+
             const reportdb = await getDocs(collection(database, "prueba"));
-            const mine = reportdb.docs.map((doc) => ({id: doc.id, ...doc.data(),
+            const mine = reportdb.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+            const prueba2db = await getDocs(collection(database, "prueba2"));
+            const prueba2Data = prueba2db.docs.map((doc) => doc.data().ruta);
+
+            const mergedData = mine.map((item, index) => ({
+                ...item,
+                ruta: prueba2Data[index],
             }));
-            setReportsData(mine);
-        }
+
+            const filteredData = selectedRuta
+                ? mergedData.filter((item) => item.ruta === selectedRuta)
+                : mergedData;
+
+            setReportsData(filteredData);
+        };
+
         fetchData();
-    }, []);
+    }, [selectedRuta]);
 
-const saveData = {
-    id, fecha, es, ruta, codigo,
-};
-
-
+    const saveData = {
+        id,
+        fecha,
+        es,
+        codigo,
+    };
 
     return (
         <>
@@ -42,21 +54,21 @@ const saveData = {
                     <table className="table-reports">
                         <thead>
                             <tr className="tr-reports">
-                            <th className="th-reports">ID</th>
+                                <th className="th-reports">ID</th>
                                 <th className="th-reports">Fecha</th>
                                 <th className="th-reports">E/S</th>
-                                <th className="th-reports">Ruta </th>
-                                <th className="th-reports">Código </th>
+                                <th className="th-reports">Ruta</th>
+                                <th className="th-reports">Código</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {reportsData.map((mine) => (
-                                <tr key= {mine.id}>
-                                    <td>{mine.id}</td>
-                                    <td>{mine.fecha}</td>
-                                    <td>{mine.es}</td>
-                                    <td>{mine.ruta}</td>
-                                    <td>{mine.codigo}</td>
+                            {reportsData.map((item) => (
+                                <tr key={item.id}>
+                                    <td>{item.id}</td>
+                                    <td>{item.fecha}</td>
+                                    <td>{item.es}</td>
+                                    <td>{item.ruta}</td>
+                                    <td>{item.codigo}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -65,7 +77,6 @@ const saveData = {
             </section>
         </>
     );
-
 };
 
 export default Tablereports;
