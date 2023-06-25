@@ -15,8 +15,8 @@ export default function IndexPrice() {
     const [input3, setInput3] = useState<number>(0);
     const [result, setResult] = useState<number>(0);
 
-    const [rutaOptions, setRutaOptions] = useState<string[]>([]);
-    const [selectedRuta, setSelectedRuta] = useState<string>("");
+    const [rutaOptions, setRutaOptions] = useState<{id:string,nombre:string,distancia:number}[]>([]);
+    const [selectedRuta, setSelectedRuta] = useState("");
 
     const [name, setName] = useState<string>("");
     const [last, setLast] = useState<string>("");
@@ -25,19 +25,26 @@ export default function IndexPrice() {
     const [id, setId] = useState<string>("");
 
     useEffect(() => {
-        const fetchRutaOptions = async () => {
-            const app = initializeApp(firebaseConfig);
-            const database = getFirestore(app);
+  const fetchRutaOptions = async () => {
+    try {
+      const app = initializeApp(firebaseConfig);
+      const database = getFirestore(app);
 
-            const prueba2db = await getDocs(collection(database, "prueba2"));
-            const prueba2Data = prueba2db.docs.map((doc) => doc.data().ruta);
+      const prueba2db = await getDocs(collection(database, "ruta"));
+      const prueba2Data = prueba2db.docs.map((doc) => ({
+        id: doc.id,
+        nombre: doc.data().nombre,
+        distancia: doc.data().distanciaKm,
+      }));
 
-            setRutaOptions(prueba2Data);
-        };
+      setRutaOptions(prueba2Data);
+    } catch (error) {
+      console.error("Error al obtener los datos de Firebase:", error);
+    }
+  };
 
-        fetchRutaOptions();
-    }, []);
-
+  fetchRutaOptions();
+}, []);
     const handlerPrice = () => {
         const Price = calculate(input1, input2, input3, selectedRuta);
         setResult(Price);
@@ -95,8 +102,8 @@ export default function IndexPrice() {
                         <select className="Select-Rout m-4" onChange={handleRutaChange}>
                             <option value="">Selecciona una ruta</option>
                             {rutaOptions.map((ruta) => (
-                                <option key={ruta} value={ruta}>
-                                    {ruta}
+                                <option key={ruta.id} value={ruta.id}>
+                                    {ruta.distancia}
                                 </option>
                             ))}
                         </select>
