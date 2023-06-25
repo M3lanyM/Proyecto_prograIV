@@ -1,18 +1,37 @@
 import { calculate } from "@/components/function/calculateprice";
 import Page_footer from "@/components/page_footer"
 import Page_header from "@/components/page_header"
+import firebaseConfig from "@/firebase/app";
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 export default function IndexPrice() {
     /*Price*/
     const [input1, setInput1] = useState<number>(0);
     const [input2, setInput2] = useState<number>(0);
     const [input3, setInput3] = useState<number>(0);
-    const [input4, setInput4] = useState("");
     const [result, setResult] = useState<number>(0);
+    const [rutaOptions, setRutaOptions] = useState<string[]>([]);
+    const [selectedRuta, setSelectedRuta] = useState<string>("");
+
+    useEffect(() => {
+        const fetchRutaOptions = async () => {
+            const app = initializeApp(firebaseConfig);
+            const database = getFirestore(app);
+
+            const prueba2db = await getDocs(collection(database, "prueba2"));
+            const prueba2Data = prueba2db.docs.map((doc) => doc.data().ruta);
+
+            setRutaOptions(prueba2Data);
+        };
+
+        fetchRutaOptions();
+    }, []);
 
     const handlerPrice = () => {
-        const Price = calculate(input1, input2, input3, input4);
+        const Price = calculate(input1, input2, input3, selectedRuta);
         setResult(Price);
     }
     /*Personal*/
@@ -21,6 +40,9 @@ export default function IndexPrice() {
     const handlerPart = () => {
         setPart(true);
     }
+    const handleRutaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedRuta(event.target.value);
+    };
 
     return (
         <>
@@ -46,13 +68,14 @@ export default function IndexPrice() {
                             value={input3} onChange={(e) => setInput3(parseInt(e.target.value))} placeholder="W" />
                     </div>
                     <div>
-                        <label className="label1-price" form="Route">Seleccione la Ruta:</label>
-                        <select className="Select-Rout m-4"
-                            value={input4} onChange={(e) => setInput4(e.target.value)}>
-                            <option value="Seleccion">Seleccione una ruta</option>
-                            <option value="SanJose">San Jose</option>
-                            <option value="PasoCanoas">Paso Canoas</option>
-                            <option value="Neily">Neily</option>
+                        <label className="label1-price"> Seleccione la ruta</label>
+                        <select className="Select-Rout m-4" onChange={handleRutaChange}>
+                            <option value="">Selecciona una ruta</option>
+                            {rutaOptions.map((ruta) => (
+                                <option key={ruta} value={ruta}>
+                                    {ruta}
+                                </option>
+                            ))}
                         </select>
                     </div>
                 </section>
