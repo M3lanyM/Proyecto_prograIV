@@ -17,6 +17,7 @@ export const sendDataToFirebase = async (name:string,last:string,mail:string,num
     try {
         const docRef = await addDoc(collection(database, "destinatario"), dataToAdd);
         console.log("Documento agregado con ID:", docRef.id);
+        return docRef.id;
     } catch (error) {
         console.error("Error al agregar el documento a Firebase:", error);
     }
