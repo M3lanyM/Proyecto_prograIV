@@ -1,5 +1,6 @@
 import { calculate } from "@/components/function/calculateprice";
 import { sendDataToFirebase } from "@/components/function/sendDataBase";
+import { sendDataEnco } from "@/components/function/sendDataEncomineda";
 import Page_footer from "@/components/page_footer"
 import Page_header from "@/components/page_header"
 import firebaseConfig from "@/firebase/app";
@@ -15,53 +16,64 @@ export default function IndexPrice() {
     const [input3, setInput3] = useState<number>(0);
     const [result, setResult] = useState<number>(0);
 
-    const [rutaOptions, setRutaOptions] = useState<{id:string,nombre:string,distancia:number}[]>([]);
+    const [rutaOptions, setRutaOptions] = useState<{ id: string, nombre: string, distancia: number }[]>([]);
     const [selectedRuta, setSelectedRuta] = useState("");
 
     const [name, setName] = useState<string>("");
     const [last, setLast] = useState<string>("");
     const [mail, setMail] = useState<string>("");
     const [number, setNumber] = useState<string>("");
-    const [id, setId] = useState<string>("");
+    const [idDes, setId] = useState<string>("");
 
     useEffect(() => {
-  const fetchRutaOptions = async () => {
-    try {
-      const app = initializeApp(firebaseConfig);
-      const database = getFirestore(app);
+        const fetchRutaOptions = async () => {
+            try {
+                const app = initializeApp(firebaseConfig);
+                const database = getFirestore(app);
 
-      const prueba2db = await getDocs(collection(database, "ruta"));
-      const prueba2Data = prueba2db.docs.map((doc) => ({
-        id: doc.id,
-        nombre: doc.data().nombre,
-        distancia: doc.data().distanciaKm,
-      }));
+                const prueba2db = await getDocs(collection(database, "ruta"));
+                const prueba2Data = prueba2db.docs.map((doc) => ({
+                    id: doc.id,
+                    nombre: doc.data().nombre,
+                    distancia: doc.data().distanciaKm,
+                }));
 
-      setRutaOptions(prueba2Data);
-    } catch (error) {
-      console.error("Error al obtener los datos de Firebase:", error);
-    }
-  };
+                setRutaOptions(prueba2Data);
+            } catch (error) {
+                console.error("Error al obtener los datos de Firebase:", error);
+            }
+        };
 
-  fetchRutaOptions();
-}, []);
+        fetchRutaOptions();
+    }, []);
     const handlerPrice = () => {
-        const Price = calculate(input1, input2, input3, selectedRuta);
-        setResult(Price);
+        if (selectedRuta) {
+            const selected = rutaOptions.find((ruta) => ruta.id === selectedRuta);
+            if (selected) {
+                const selectedDis = selected.distancia;
+                const Price = calculate(input1, input2, input3, selectedDis);
+                setResult(Price);
+            }
+        }
     }
 
     const handleButtonClick = () => {
-        sendDataToFirebase(name, last, mail, number)
-            .then((id) => {
-                if (id) {
-                    setId(id);
-                    console.log("este es el id para la nueva tablas de referencias");
-                    console.log(id);
-                }
-            })
-            .catch((error) => {
-                console.error("Error al enviar los datos a Firebase:", error);
-            });
+        if (selectedRuta) {
+            const selected = rutaOptions.find((ruta) => ruta.id === selectedRuta);
+            if (selected) {
+                const selectedId = selected.id;
+                sendDataToFirebase(name, last, mail, number)
+                    .then((id) => {
+                        if (id) {
+                            console.log("el destinatario es: ",id,"por la ruta: ",selectedId)
+                            sendDataEnco(input1, input2, input3,selectedId,result,id);
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error al enviar los datos a Firebase:", error);
+                    });
+            }
+        }
     };
 
     /*Personal*/
@@ -103,7 +115,7 @@ export default function IndexPrice() {
                             <option value="">Selecciona una ruta</option>
                             {rutaOptions.map((ruta) => (
                                 <option key={ruta.id} value={ruta.id}>
-                                    {ruta.distancia}
+                                    {ruta.nombre}
                                 </option>
                             ))}
                         </select>
