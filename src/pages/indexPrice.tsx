@@ -1,4 +1,5 @@
 import { calculate } from "@/components/function/calculateprice";
+import { sendDataToFirebase } from "@/components/function/sendDataBase";
 import Page_footer from "@/components/page_footer"
 import Page_header from "@/components/page_header"
 import firebaseConfig from "@/firebase/app";
@@ -13,8 +14,14 @@ export default function IndexPrice() {
     const [input2, setInput2] = useState<number>(0);
     const [input3, setInput3] = useState<number>(0);
     const [result, setResult] = useState<number>(0);
+
     const [rutaOptions, setRutaOptions] = useState<string[]>([]);
     const [selectedRuta, setSelectedRuta] = useState<string>("");
+
+    const [name, setName] = useState<string>("");
+    const [last, setLast] = useState<string>("");
+    const [mail, setMail] = useState<string>("");
+    const [number, setNumber] = useState<string>("");
 
     useEffect(() => {
         const fetchRutaOptions = async () => {
@@ -42,6 +49,10 @@ export default function IndexPrice() {
     }
     const handleRutaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedRuta(event.target.value);
+    };
+
+    const handleButtonClick = () => {
+        sendDataToFirebase(name,last,mail,number);
     };
 
     return (
@@ -90,22 +101,26 @@ export default function IndexPrice() {
                     <section className="container-personal grid grid-cols-1 gap-4">
                         <div>
                             <label className="label1-price" form="name">Nombre:</label>
-                            <input className="input2-price m-4" type="text" placeholder="Ingrese su nombre" />
+                            <input className="input2-price m-4" type="text" placeholder="Ingrese su nombre" 
+                            value={name} onChange={(e) => setName(e.target.value)}/>
                         </div>
                         <div>
                             <label className="label1-price" form="lastname">Apellido:</label>
-                            <input className="input2-price m-4" type="text" placeholder="Ingrese su apellido" />
+                            <input className="input2-price m-4" type="text" placeholder="Ingrese su apellido" 
+                            value={last} onChange={(e) => setLast(e.target.value)}/>
                         </div>
                         <div>
                             <label className="label1-price" form="email">Email:</label>
-                            <input className="input2-price m-4" type="email" placeholder="Ingrese su correo electrónico" />
+                            <input className="input2-price m-4" type="email" placeholder="Ingrese su correo electrónico"
+                            value={mail} onChange={(e) => setMail(e.target.value)}/>
                         </div>
                         <div>
                             <label className="label1-price" form="phonenumber">Teléfono:</label>
-                            <input className="input2-price m-4" type="tel" placeholder="Ingrese su número de teléfono" />
+                            <input className="input2-price m-4" type="tel" placeholder="Ingrese su número de teléfono" 
+                            value={number} onChange={(e) => setNumber(e.target.value)}/>
                         </div>
                         <div>
-                            <button className="Generate-bill" >Generar Factura</button>
+                            <button className="Generate-bill" onClick={handleButtonClick}>Generar Factura</button>
                         </div>
                     </section>
                 )}
