@@ -8,6 +8,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { generatePDF } from "@/components/function/generateBilling";
 
 export default function IndexPrice() {
     /*Price*/
@@ -53,6 +54,7 @@ export default function IndexPrice() {
                 const selectedDis = selected.distancia;
                 const Price = calculate(input1, input2, input3, selectedDis);
                 setResult(Price);
+                generatePDF();
             }
         }
     }
