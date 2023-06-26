@@ -11,7 +11,6 @@ export const sendDataToFirebase = async (name:string,last:string,mail:string,num
         email:mail,
         nombre:name,
         telefono:num,
-        // Otros campos y valores que desees enviar a Firebase
     };
 
     try {

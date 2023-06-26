@@ -19,12 +19,12 @@ export default function IndexPrice() {
 
     const [rutaOptions, setRutaOptions] = useState<{ id: string, nombre: string, distancia: number }[]>([]);
     const [selectedRuta, setSelectedRuta] = useState("");
+    const [Ruta, setRuta] = useState("");
 
     const [name, setName] = useState<string>("");
     const [last, setLast] = useState<string>("");
     const [mail, setMail] = useState<string>("");
     const [number, setNumber] = useState<string>("");
-    const [idDes, setId] = useState<string>("");
 
     useEffect(() => {
         const fetchRutaOptions = async () => {
@@ -52,30 +52,26 @@ export default function IndexPrice() {
             const selected = rutaOptions.find((ruta) => ruta.id === selectedRuta);
             if (selected) {
                 const selectedDis = selected.distancia;
+                const selectedRut = selected.id;
                 const Price = calculate(input1, input2, input3, selectedDis);
                 setResult(Price);
-                generatePDF();
+                setRuta(selectedRut);
+                //generatePDF();
             }
         }
     }
 
     const handleButtonClick = () => {
-        if (selectedRuta) {
-            const selected = rutaOptions.find((ruta) => ruta.id === selectedRuta);
-            if (selected) {
-                const selectedId = selected.id;
-                sendDataToFirebase(name, last, mail, number)
-                    .then((id) => {
-                        if (id) {
-                            console.log("el destinatario es: ",id,"por la ruta: ",selectedId)
-                            sendDataEnco(input1, input2, input3,selectedId,result,id);
-                        }
-                    })
-                    .catch((error) => {
-                        console.error("Error al enviar los datos a Firebase:", error);
-                    });
-            }
-        }
+        sendDataToFirebase(name, last, mail, number)
+            .then((id) => {
+                if (id) {
+                    console.log("el destinatario es: ", id, "por la ruta: ", Ruta)
+                    sendDataEnco(input1, input2, input3, Ruta, result, id);
+                }
+            })
+            .catch((error) => {
+                console.error("Error al enviar los datos a Firebase:", error);
+            });
     };
 
     /*Personal*/
