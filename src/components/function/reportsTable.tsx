@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "@/firebase/app";
 
@@ -7,45 +7,50 @@ interface TablereportsProps {
     selectedRuta: string;
 }
 
+interface RutaData {
+    [rutaId: string]: string;
+}
+
 const Tablereports = ({ selectedRuta }: TablereportsProps) => {
-    const [id, setId] = useState("");
-    const [fecha, setFecha] = useState("");
-    const [es, setES] = useState("");
-    const [codigo, setCodigo] = useState("");
-    const [reportsData, setReportsData] = useState<any[]>([]);
+    const [filteredReportsData, setFilteredReportsData] = useState<any[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const app = initializeApp(firebaseConfig);
             const database = getFirestore(app);
 
-            const reportdb = await getDocs(collection(database, "prueba"));
-            const mine = reportdb.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+            const encomiendaCollection = collection(database, "encomienda");
+            const encomiendaSnapshot = await getDocs(encomiendaCollection);
 
-            const prueba2db = await getDocs(collection(database, "prueba2"));
-            const prueba2Data = prueba2db.docs.map((doc) => doc.data().ruta);
+            const rutaCollection = collection(database, "ruta");
+            const rutaSnapshot = await getDocs(rutaCollection);
+            const rutaData: RutaData = rutaSnapshot.docs.reduce((acc, doc) => {
+                const rutaId = doc.id;
+                const rutaNombre = doc.data().nombre;
+                return { ...acc, [rutaId]: rutaNombre };
+            }, {});
 
-            const mergedData = mine.map((item, index) => ({
-                ...item,
-                ruta: prueba2Data[index],
-            }));
+            const reportsData = encomiendaSnapshot.docs.map((doc) => {
+                const encomiendaData = doc.data();
+                const rutaId = encomiendaData.ruta.id;
+                return {
+                    id: doc.id,
+                    fecha: encomiendaData.fecha.toDate(),
+                    ruta: rutaData[rutaId],
+                    codigo: doc.id,
+                };
+            });
+
 
             const filteredData = selectedRuta
-                ? mergedData.filter((item) => item.ruta === selectedRuta)
-                : mergedData;
+                ? reportsData.filter((item) => item.ruta === selectedRuta)
+                : reportsData;
 
-            setReportsData(filteredData);
+            setFilteredReportsData(filteredData);
         };
 
         fetchData();
     }, [selectedRuta]);
-
-    const saveData = {
-        id,
-        fecha,
-        es,
-        codigo,
-    };
 
     return (
         <>
@@ -54,21 +59,17 @@ const Tablereports = ({ selectedRuta }: TablereportsProps) => {
                     <table className="table-reports">
                         <thead>
                             <tr className="tr-reports">
-                                <th className="th-reports">ID</th>
                                 <th className="th-reports">Fecha</th>
-                                <th className="th-reports">E/S</th>
                                 <th className="th-reports">Ruta</th>
                                 <th className="th-reports">Código</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {reportsData.map((item) => (
+                            {filteredReportsData.map((item) => (
                                 <tr key={item.id}>
-                                    <td>{item.id}</td>
-                                    <td>{item.fecha}</td>
-                                    <td>{item.es}</td>
+                                    <td>{item.fecha.toLocaleDateString()}</td>
                                     <td>{item.ruta}</td>
-                                    <td>{item.codigo}</td>
+                                    <td>{item.id}</td>
                                 </tr>
                             ))}
                         </tbody>

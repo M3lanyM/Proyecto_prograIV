@@ -3,7 +3,6 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "@/firebase/app";
 import DatePicker from "@/components/function/calendar";
-import Page_footer from "@/components/page_footer";
 import Page_header from "@/components/page_header";
 import Tablereports from "@/components/function/reportsTable";
 
@@ -16,10 +15,10 @@ export default function indexReports() {
             const app = initializeApp(firebaseConfig);
             const database = getFirestore(app);
 
-            const prueba2db = await getDocs(collection(database, "prueba2"));
-            const prueba2Data = prueba2db.docs.map((doc) => doc.data().ruta);
+            const rutareportdb = await getDocs(collection(database, "ruta"));
+            const rutareportData = rutareportdb.docs.map((doc) => doc.data().nombre);
 
-            setRutaOptions(prueba2Data);
+            setRutaOptions(rutareportData);
         };
 
         fetchRutaOptions();
