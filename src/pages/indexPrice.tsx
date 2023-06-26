@@ -56,7 +56,6 @@ export default function IndexPrice() {
                 const Price = calculate(input1, input2, input3, selectedDis);
                 setResult(Price);
                 setRuta(selectedRut);
-                //generatePDF();
             }
         }
     }
@@ -66,7 +65,15 @@ export default function IndexPrice() {
             .then((id) => {
                 if (id) {
                     console.log("el destinatario es: ", id, "por la ruta: ", Ruta)
-                    sendDataEnco(input1, input2, input3, Ruta, result, id);
+                    sendDataEnco(input1, input2, input3, Ruta, result, id)
+                    .then((ids) =>{
+                        if(ids){
+                            //agregar el generador
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error al enviar los datos a Firebase:", error);
+                    });
                 }
             })
             .catch((error) => {
