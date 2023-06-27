@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { getFirestore, collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "@/firebase/app";
 
 interface TablereportsProps {
     selectedRuta: string;
+    selectedDate: Date | null;
 }
 
 interface RutaData {
     [rutaId: string]: string;
 }
 
-const Tablereports = ({ selectedRuta }: TablereportsProps) => {
+const Tablereports = ({ selectedRuta, selectedDate }: TablereportsProps) => {
     const [filteredReportsData, setFilteredReportsData] = useState<any[]>([]);
 
     useEffect(() => {
@@ -41,16 +42,21 @@ const Tablereports = ({ selectedRuta }: TablereportsProps) => {
                 };
             });
 
-
             const filteredData = selectedRuta
-                ? reportsData.filter((item) => item.ruta === selectedRuta)
-                : reportsData;
+                ? reportsData.filter(
+                    (item) =>
+                        item.ruta === selectedRuta &&
+                        (!selectedDate || item.fecha.toDateString() === selectedDate.toDateString())
+                )
+                : reportsData.filter(
+                    (item) => !selectedDate || item.fecha.toDateString() === selectedDate.toDateString()
+                );
 
             setFilteredReportsData(filteredData);
         };
 
         fetchData();
-    }, [selectedRuta]);
+    }, [selectedRuta, selectedDate]);
 
     return (
         <>

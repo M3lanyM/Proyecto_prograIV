@@ -9,6 +9,7 @@ import Tablereports from "@/components/function/reportsTable";
 export default function indexReports() {
     const [rutaOptions, setRutaOptions] = useState<string[]>([]);
     const [selectedRuta, setSelectedRuta] = useState<string>("");
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
     useEffect(() => {
         const fetchRutaOptions = async () => {
@@ -26,6 +27,10 @@ export default function indexReports() {
 
     const handleRutaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedRuta(event.target.value);
+    };
+
+    const handleDateChange = (date: Date | null) => {
+        setSelectedDate(date);
     };
 
     return (
@@ -50,8 +55,7 @@ export default function indexReports() {
                 </div>
 
                 <div className="report-container">
-                    <DatePicker />
-                    <DatePicker />
+                    <DatePicker selectedDate={selectedDate} onDateChange={handleDateChange} />
 
                     <select className="route-report" onChange={handleRutaChange}>
                         <option value="">Selecciona una ruta</option>
@@ -66,7 +70,7 @@ export default function indexReports() {
             </article>
 
             <section>
-                <Tablereports selectedRuta={selectedRuta} />
+                <Tablereports selectedRuta={selectedRuta} selectedDate={selectedDate} />
             </section>
 
             <footer>
