@@ -3,18 +3,17 @@ import firebaseConfig from "@/firebase/app";
 import { initializeApp } from "firebase/app";
 
 export const sendDataEnco = async (peso:number,altura:number,ancho:number,route:string,
-    price:number,dest:string) => {
+    price:number,dest:string,date:Date) => {
 
     const app = initializeApp(firebaseConfig);
     const database = getFirestore(app);
-    const currentDate = new Date();
 
     const dataToAdd = {
         altura: altura,
         ancho: ancho,
         distinatario: doc(database,"destinatario",dest),
         ruta: doc(database,"ruta",route),
-        fecha:currentDate,
+        fecha:date,
         peso:peso,
         precio: price,
     };

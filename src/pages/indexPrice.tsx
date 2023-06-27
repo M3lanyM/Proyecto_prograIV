@@ -48,6 +48,10 @@ export default function IndexPrice() {
         fetchRutaOptions();
     }, []);
     const handlerPrice = () => {
+        if (input1 === 0 || input2 === 0 || input3 === 0 || selectedRuta === "") {
+            alert('Por favor, completa todos los campos obligatorios.');
+            return;
+        }
         if (selectedRuta) {
             const selected = rutaOptions.find((ruta) => ruta.id === selectedRuta);
             if (selected) {
@@ -61,19 +65,24 @@ export default function IndexPrice() {
     }
 
     const handleButtonClick = () => {
+        if (name === "" || last === "" || mail === "" || number === "") {
+            alert('Por favor, completa todos los campos obligatorios.');
+            return;
+        }
+        const date = new Date();
         sendDataToFirebase(name, last, mail, number)
             .then((id) => {
                 if (id) {
                     console.log("el destinatario es: ", id, "por la ruta: ", Ruta)
-                    sendDataEnco(input1, input2, input3, Ruta, result, id)
-                    .then((ids) =>{
-                        if(ids){
-                            //agregar el generador
-                        }
-                    })
-                    .catch((error) => {
-                        console.error("Error al enviar los datos a Firebase:", error);
-                    });
+                    sendDataEnco(input1, input2, input3, Ruta, result, id, date)
+                        .then((ids) => {
+                            if (ids) {
+                                generatePDF(ids, input2, input3, result, date, input1);
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error al enviar los datos a Firebase:", error);
+                        });
                 }
             })
             .catch((error) => {
@@ -85,6 +94,10 @@ export default function IndexPrice() {
     const [part, setPart] = useState(false);
 
     const handlerPart = () => {
+        if(result===0){
+            alert('Por favor, realice un calculo de precio');
+            return;
+        }
         setPart(true);
     }
     const handleRutaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
