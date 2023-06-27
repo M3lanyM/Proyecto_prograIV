@@ -43,7 +43,6 @@ const PackageTracking: React.FC = () => {
                                         <label form="delivered">Entregado</label>
                                     </div>
                                 </div>
-
                                 <table className="table-track">
                                     <thead>
                                         <tr className="tr-track">
