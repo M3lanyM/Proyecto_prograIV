@@ -20,6 +20,8 @@ export default function IndexPrice() {
     const [rutaOptions, setRutaOptions] = useState<{ id: string, nombre: string, distancia: number }[]>([]);
     const [selectedRuta, setSelectedRuta] = useState("");
     const [Ruta, setRuta] = useState("");
+    const [RutaName, setRutaName] = useState("");
+    const [RutaDis, setRutaDis] = useState(0);
 
     const [name, setName] = useState<string>("");
     const [last, setLast] = useState<string>("");
@@ -57,8 +59,11 @@ export default function IndexPrice() {
             if (selected) {
                 const selectedDis = selected.distancia;
                 const selectedRut = selected.id;
+                const name= selected.nombre;
                 const Price = calculate(input1, input2, input3, selectedDis);
                 setResult(Price);
+                setRutaDis(selectedDis);
+                setRutaName(name);
                 setRuta(selectedRut);
             }
         }
@@ -77,7 +82,7 @@ export default function IndexPrice() {
                     sendDataEnco(input1, input2, input3, Ruta, result, id, date)
                         .then((ids) => {
                             if (ids) {
-                                generatePDF(ids, input2, input3, result, date, input1);
+                                generatePDF(ids, input2, input3, result, date, input1,RutaDis,RutaName);
                             }
                         })
                         .catch((error) => {
@@ -94,7 +99,7 @@ export default function IndexPrice() {
     const [part, setPart] = useState(false);
 
     const handlerPart = () => {
-        if(result===0){
+        if (result === 0) {
             alert('Por favor, realice un calculo de precio');
             return;
         }
