@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "@/firebase/app";
+import generatePDF from "@/components/function/reportsPDF";
 
 interface TablereportsProps {
     selectedRuta: string;
@@ -58,6 +59,9 @@ const Tablereports = ({ selectedRuta, selectedDate }: TablereportsProps) => {
         fetchData();
     }, [selectedRuta, selectedDate]);
 
+    const handleGeneratePDF = () => {
+        generatePDF(filteredReportsData);
+    };
     return (
         <>
             <section className="">
@@ -82,6 +86,7 @@ const Tablereports = ({ selectedRuta, selectedDate }: TablereportsProps) => {
                     </table>
                 </div>
             </section>
+            <button className="report-button" onClick={handleGeneratePDF}>Generar PDF</button>
         </>
     );
 };
