@@ -17,6 +17,7 @@ const Tabletracks = ({ selectedEncomiendaId }: TabletracksProps) => {
     const [encomiendaData, setEncomiendaData] = useState<EncomiendaData | null>(null);
 
     useEffect(() => {
+
         const fetchData = async () => {
             const app = initializeApp(firebaseConfig);
             const database = getFirestore(app);
@@ -52,21 +53,21 @@ const Tabletracks = ({ selectedEncomiendaId }: TabletracksProps) => {
 
     return (
         <>
-            
-                <table className="table-track">
-                    <thead>
-                        <tr className="tr-track">
-                            <th className="th-track">Fecha</th>
-                            <th className="th-track ">Descripcion </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr className="tr-track">
-                            <td className="td-track" data-label="Fecha">Dato 1</td>
-                            <td className="td-track" data-label="E/S">Dato 2</td>
-                        </tr>
-                    </tbody>
-                </table>
+
+            <table className="table-track">
+                <thead>
+                    <tr className="tr-track">
+                        <th className="th-track">Fecha</th>
+                        <th className="th-track ">ruta </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr className="tr-track">
+                        <td>{encomiendaData?.fecha.toLocaleDateString()}</td>
+                        <td>{encomiendaData?.ruta}</td>
+                    </tr>
+                </tbody>
+            </table>
 
         </>
     );
