@@ -1,6 +1,6 @@
 import { calculate } from "@/components/function/calculateprice";
-import { sendDataToFirebase } from "@/components/function/sendDataBase";
-import { sendDataEnco } from "@/components/function/sendDataEncomineda";
+import { sendDataToFirebase } from "@/components/function/sendDataAddress";
+import { sendDataEnco } from "@/components/function/sendDataParcel";
 import Page_footer from "@/components/page_footer"
 import Page_header from "@/components/page_header"
 import firebaseConfig from "@/firebase/app";
@@ -17,11 +17,11 @@ export default function IndexPrice() {
     const [input3, setInput3] = useState<number>(0);
     const [result, setResult] = useState<number>(0);
 
-    const [rutaOptions, setRutaOptions] = useState<{ id: string, nombre: string, distancia: number }[]>([]);
-    const [selectedRuta, setSelectedRuta] = useState("");
-    const [Ruta, setRuta] = useState("");
-    const [RutaName, setRutaName] = useState("");
-    const [RutaDis, setRutaDis] = useState(0);
+    const [routeOptions, setRouteOptions] = useState<{ id: string, name: string, distance: number }[]>([]);
+    const [selectedRoute, setSelectedRoute] = useState("");
+    const [Route, setRoute] = useState("");
+    const [RouteName, setRouteName] = useState("");
+    const [RouteDis, setRouteDis] = useState(0);
 
     const [name, setName] = useState<string>("");
     const [last, setLast] = useState<string>("");
@@ -34,14 +34,14 @@ export default function IndexPrice() {
                 const app = initializeApp(firebaseConfig);
                 const database = getFirestore(app);
 
-                const prueba2db = await getDocs(collection(database, "ruta"));
-                const prueba2Data = prueba2db.docs.map((doc) => ({
+                const db = await getDocs(collection(database, "ruta"));
+                const T2Data = db.docs.map((doc) => ({
                     id: doc.id,
-                    nombre: doc.data().nombre,
-                    distancia: doc.data().distanciaKm,
+                    name: doc.data().nombre,
+                    distance: doc.data().distanciaKm,
                 }));
 
-                setRutaOptions(prueba2Data);
+                setRouteOptions(T2Data);
             } catch (error) {
                 console.error("Error al obtener los datos de Firebase:", error);
             }
@@ -50,21 +50,21 @@ export default function IndexPrice() {
         fetchRutaOptions();
     }, []);
     const handlerPrice = () => {
-        if (input1 === 0 || input2 === 0 || input3 === 0 || selectedRuta === "") {
+        if (input1 === 0 || input2 === 0 || input3 === 0 || selectedRoute === "") {
             alert('Por favor, completa todos los campos obligatorios.');
             return;
         }
-        if (selectedRuta) {
-            const selected = rutaOptions.find((ruta) => ruta.id === selectedRuta);
+        if (selectedRoute) {
+            const selected = routeOptions.find((route) => route.id === selectedRoute);
             if (selected) {
-                const selectedDis = selected.distancia;
+                const selectedDis = selected.distance;
                 const selectedRut = selected.id;
-                const name= selected.nombre;
+                const name= selected.name;
                 const Price = calculate(input1, input2, input3, selectedDis);
                 setResult(Price);
-                setRutaDis(selectedDis);
-                setRutaName(name);
-                setRuta(selectedRut);
+                setRouteDis(selectedDis);
+                setRouteName(name);
+                setRoute(selectedRut);
             }
         }
     }
@@ -78,11 +78,11 @@ export default function IndexPrice() {
         sendDataToFirebase(name, last, mail, number)
             .then((id) => {
                 if (id) {
-                    console.log("el destinatario es: ", id, "por la ruta: ", Ruta)
-                    sendDataEnco(input1, input2, input3, Ruta, result, id, date)
+                    console.log("el destinatario es: ", id, "por la ruta: ", Route)
+                    sendDataEnco(input1, input2, input3, Route, result, id, date)
                         .then((ids) => {
                             if (ids) {
-                                generatePDF(ids, input2, input3, result, date, input1,RutaDis,RutaName);
+                                generatePDF(ids, input2, input3, result, date, input1,RouteDis,RouteName);
                             }
                         })
                         .catch((error) => {
@@ -93,6 +93,8 @@ export default function IndexPrice() {
             .catch((error) => {
                 console.error("Error al enviar los datos a Firebase:", error);
             });
+        alert("Se registro la encomienda")
+        window.location.reload();
     };
 
     /*Personal*/
@@ -106,7 +108,7 @@ export default function IndexPrice() {
         setPart(true);
     }
     const handleRutaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedRuta(event.target.value);
+        setSelectedRoute(event.target.value);
     };
 
     return (
@@ -136,9 +138,9 @@ export default function IndexPrice() {
                         <label className="label1-price"> Seleccione la ruta</label>
                         <select className="Select-Rout m-4" onChange={handleRutaChange}>
                             <option value="">Selecciona una ruta</option>
-                            {rutaOptions.map((ruta) => (
-                                <option key={ruta.id} value={ruta.id}>
-                                    {ruta.nombre}
+                            {routeOptions.map((route) => (
+                                <option key={route.id} value={route.id}>
+                                    {route.name}
                                 </option>
                             ))}
                         </select>
