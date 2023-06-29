@@ -14,29 +14,29 @@ const generatePDF = async (data: any[]) => {
   const title = 'Reportes de Buses Universidad Nacional';
   const subtitle = 'Cierre de ventas';
 
-  
+
   const titleWidth = fontBold.widthOfTextAtSize(title, titleFontSize);
   const titleX = (page.getWidth() - titleWidth) / 2;
   let titleY = page.getHeight() - 50;
   page.drawText(title, { x: titleX, y: titleY, size: titleFontSize, font: fontBold });
 
-  
+
   const spaceAfterTitle = 15;
   titleY -= spaceAfterTitle;
 
-  
-  const subtitleColor = rgb(0, 0, 1); 
+
+  const subtitleColor = rgb(0, 0, 1);
   const subtitleX = 50;
-  const subtitleY = titleY - 2 * titleFontSize; 
+  const subtitleY = titleY - 2 * titleFontSize;
   page.drawText(subtitle, { x: subtitleX, y: subtitleY, size: subtitleFontSize, font: fontRegular, color: subtitleColor });
 
   let x = 50;
   let y = subtitleY - 20;
-  
+
   const spaceAfterSubtitle = 15;
   y -= spaceAfterSubtitle;
 
-  const columnSpacing = 117; 
+  const columnSpacing = 117;
 
   page.drawText('Fecha', { x, y, size: columnFontSize, font: fontBold });
   x += columnSpacing;
@@ -49,7 +49,7 @@ const generatePDF = async (data: any[]) => {
   x = 50;
   y -= 20;
 
-  
+
   for (const item of data) {
     page.drawText(item.fecha.toLocaleDateString(), { x, y, size: columnFontSize, font: fontRegular });
     x += columnSpacing;
