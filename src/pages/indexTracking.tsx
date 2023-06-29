@@ -1,10 +1,17 @@
 import Page_header from '@/components/page_header';
 import React, { useState } from "react";
 import Page_footer from '@/components/page_footer';
+import Tabletracks from "@/components/function/tracksTable";
 
 
 const PackageTracking: React.FC = () => {
+    const [selectedEncomiendaId, setselectedEncomiendaId] = useState<string>("");
     const [part, setPart] = useState(false);
+
+    const handleRutaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setselectedEncomiendaId(event.target.value);
+    };
+    
 
     const handlerPart = () => {
         setPart(true);
@@ -14,8 +21,9 @@ const PackageTracking: React.FC = () => {
             <header>
                 <Page_header />
             </header>
-            <section  className="min-h-screen items-center">
-                <input className="code" type="text" placeholder="Código" />
+            <section className="min-h-screen items-center">
+                <input className="code" type="text" placeholder="Código" 
+                value={selectedEncomiendaId} onChange={(e) => setselectedEncomiendaId(e.target.value)} />
                 <div >
                     <button className="Rowtrack" onClick={handlerPart}>Rastrear</button>
                     {part && (
@@ -43,21 +51,10 @@ const PackageTracking: React.FC = () => {
                                         <label form="delivered">Entregado</label>
                                     </div>
                                 </div>
-                                <table className="table-track">
-                                    <thead>
-                                        <tr className="tr-track">
-                                            <th className="th-track">Fecha</th>
-                                            <th className="th-track ">Descripcion </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr className="tr-track">
-                                            <td className="td-track" data-label="Fecha">Dato 1</td>
-                                            <td className="td-track" data-label="E/S">Dato 2</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
                             </div>
+                            <section>
+                                <Tabletracks selectedEncomiendaId={selectedEncomiendaId} />
+                            </section>
                         </section>
                     )}
 
