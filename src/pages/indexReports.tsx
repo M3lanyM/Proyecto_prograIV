@@ -5,7 +5,7 @@ import firebaseConfig from "@/firebase/app";
 import DatePicker from "@/components/function/calendar";
 import Page_header from "@/components/page_header";
 import Tablereports from "@/components/function/reportsTable";
-import generatePDF from "@/components/function/reportsPDF";
+
 
 export default function indexReports() {
     const [rutaOptions, setRutaOptions] = useState<string[]>([]);
@@ -66,7 +66,7 @@ export default function indexReports() {
                             </option>
                         ))}
                     </select>
-                    
+
                 </div>
             </article>
 

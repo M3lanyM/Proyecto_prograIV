@@ -12,7 +12,7 @@ export const generatePDF = async (cod: string, hig: number, wig: number, all: nu
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
   // Agregar contenido a la página con estilos
-  page.drawText('Factura', { x: 50, y: height - 50, size: 24, font });
+  page.drawText('Factura de encomienda', { x: 50, y: height - 50, size: 24, font });
 
   page.drawText(`Número de factura: ${cod}`, { x: 50, y: height - 100, size: 12, font });
   page.drawText(`Fecha: ${date}`, { x: 50, y: height - 120, size: 12, font });

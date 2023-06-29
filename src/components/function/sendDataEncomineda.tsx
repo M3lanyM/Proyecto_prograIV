@@ -11,7 +11,7 @@ export const sendDataEnco = async (peso:number,altura:number,ancho:number,route:
     const dataToAdd = {
         altura: altura,
         ancho: ancho,
-        distinatario: doc(database,"destinatario",dest),
+        destinatario: doc(database,"destinatario",dest),
         ruta: doc(database,"ruta",route),
         fecha:date,
         peso:peso,

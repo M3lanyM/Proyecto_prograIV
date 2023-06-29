@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*Tabla de reportes*/
-
 .table-reports {
   width: 75%;
   border-collapse: collapse;
@@ -16,7 +14,6 @@
 .td-reports {
   padding: 8px;
   text-align: center;
-  border: 1px solid #284B63;
   font-family: 'Josefin Sans';
   font-size: 16px;
 }
@@ -26,9 +23,13 @@
   background-color: #353535;
 }
 
-
 .tr-reports:hover {
   background-color: #284B63;
+}
+
+.row-separator td {
+  border-top: 1px solid #284B63;
+  padding: 0;
 }
 
 @media (max-width: 600px) {
@@ -73,13 +74,13 @@
   display: flex;
   align-items: center;
   color: #FFFFFF;
-  margin-left: 3%;
+  margin-left: 17%;
 
 }
 
 .date-picker-input {
   background-color: #284B63;
-  padding: 10% 10%;
+  padding: 10% 8%;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -93,12 +94,14 @@
 .report-container {
   display: flex;
   margin-left: 22%;
-  margin-top: 3%;
+  margin-top: 2%;
 }
 
-.labels-div{
+.labels-div {
   margin-top: 3%;
+  margin-left: 7%;
 }
+
 .label1-report {
   font-size: 22px;
   font-weight: bold;
@@ -124,7 +127,8 @@
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s;
-  margin-left: 4%;
+  margin-left: 75%;
+  margin-bottom: 5%;
 }
 
 .report-button:hover {
@@ -145,11 +149,10 @@
   outline: none;
   border: 2px solid #284B63;
   box-shadow: 0 4px 8px rgba(15, 170, 218, 0.2);
-  margin-left: 5%;
+  margin-left: 12.3%;
 }
-/* Estilos adicionales para dispositivos móviles */
 
-/* Contenedor principal del calendario en dispositivos móviles */
+
 @media (max-width: 600px) {
   .date-picker-container {
     flex-direction: column;
@@ -219,7 +222,8 @@
   font-weight: bold;
   color: #284B63;
 }
-.nav-img{
+
+.nav-img {
   width: 170px;
   height: 170px;
   margin: auto;
@@ -231,14 +235,13 @@
     align-items: center;
     padding-bottom: 2%;
   }
-  
+
   .title-nav {
     font-size: 30px;
   }
-  
+
   .nav-img {
     max-width: 120px;
     max-height: 120px;
   }
 }
-
