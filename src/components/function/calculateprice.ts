@@ -1,4 +1,5 @@
 export function calculate(num1:number,num2:number,num3:number,route:number): number{
+    /*operations to calculate the price*/
     if(route<=100){
         return num1*3+300 + num2*2+220 + num3*3+750 + 100;
     }

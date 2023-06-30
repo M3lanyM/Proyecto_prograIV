@@ -11,23 +11,23 @@ import { useEffect } from "react";
 import { generatePDF } from "@/components/function/generateBilling";
 
 export default function IndexPrice() {
-    /*Price*/
+    /*stores price data*/
     const [input1, setInput1] = useState<number>(0);
     const [input2, setInput2] = useState<number>(0);
     const [input3, setInput3] = useState<number>(0);
     const [result, setResult] = useState<number>(0);
-
+    /*stores route data*/
     const [routeOptions, setRouteOptions] = useState<{ id: string, name: string, distance: number }[]>([]);
     const [selectedRoute, setSelectedRoute] = useState("");
     const [Route, setRoute] = useState("");
     const [RouteName, setRouteName] = useState("");
     const [RouteDis, setRouteDis] = useState(0);
-
+    /*stores recipient data*/
     const [name, setName] = useState<string>("");
     const [last, setLast] = useState<string>("");
     const [mail, setMail] = useState<string>("");
     const [number, setNumber] = useState<string>("");
-
+    /*get the data from the routes table in firebase*/
     useEffect(() => {
         const fetchRutaOptions = async () => {
             try {
@@ -49,6 +49,7 @@ export default function IndexPrice() {
 
         fetchRutaOptions();
     }, []);
+    /*Calculate the price and get the route data*/
     const handlerPrice = () => {
         if (input1 === 0 || input2 === 0 || input3 === 0 || selectedRoute === "") {
             alert('Por favor, completa todos los campos obligatorios.');
@@ -59,7 +60,7 @@ export default function IndexPrice() {
             if (selected) {
                 const selectedDis = selected.distance;
                 const selectedRut = selected.id;
-                const name= selected.name;
+                const name = selected.name;
                 const Price = calculate(input1, input2, input3, selectedDis);
                 setResult(Price);
                 setRouteDis(selectedDis);
@@ -68,7 +69,7 @@ export default function IndexPrice() {
             }
         }
     }
-
+    /*method which checks the data, creates the destination and creates the order, generates the pdf */
     const handleButtonClick = () => {
         if (name === "" || last === "" || mail === "" || number === "") {
             alert('Por favor, completa todos los campos obligatorios.');
@@ -82,7 +83,7 @@ export default function IndexPrice() {
                     sendDataEnco(input1, input2, input3, Route, result, id, date)
                         .then((ids) => {
                             if (ids) {
-                                generatePDF(ids, input2, input3, result, date, input1,RouteDis,RouteName);
+                                generatePDF(ids, input2, input3, result, date, input1, RouteDis, RouteName);
                             }
                         })
                         .catch((error) => {
@@ -93,12 +94,12 @@ export default function IndexPrice() {
             .catch((error) => {
                 console.error("Error al enviar los datos a Firebase:", error);
             });
-        
+
     };
 
     /*Personal*/
     const [part, setPart] = useState(false);
-
+    /*Show the personal data section*/
     const handlerPart = () => {
         if (result === 0) {
             alert('Por favor, realice un calculo de precio');
@@ -106,6 +107,7 @@ export default function IndexPrice() {
         }
         setPart(true);
     }
+    /*get the id of the route in the option*/
     const handleRutaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedRoute(event.target.value);
     };
@@ -115,7 +117,7 @@ export default function IndexPrice() {
             <header>
                 <Page_header />
             </header>
-
+            {/*Price*/}
             <div id="Price" className="min-h-screen flex flex-col justify-center items-center">
                 <section className="container-price grid grid-cols-2 gap-4">
                     <div>
