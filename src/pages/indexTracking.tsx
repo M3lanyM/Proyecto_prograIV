@@ -32,6 +32,7 @@ const PackageTracking: React.FC = () => {
       setEncomiendaHora(fecha);
     } else {
       setShowError(true);
+      alert('Error: El código no existe');
     }
   };
 
@@ -65,7 +66,7 @@ const PackageTracking: React.FC = () => {
             Rastrear
           </button>
           {showError ? (
-            <div className="error-popup">Error: El código no existe</div>
+            <div className="error-popup"></div>
           ) : part ? (
             <section id="principalTrack" className="items-center">
               <div className="downstairs">
