@@ -72,11 +72,11 @@ const PackageTracking: React.FC = () => {
               <div className="downstairs">
                 <div className="justify-center items-center">
                   <div className="containerTrack">
-                    <div className={`circleRegistered ${isTimePassed(encomiendaHora) ? 'green' : ''}`}>
-                      <img src="/img/mercaderia.png" alt="Mercaderia" />
+                  <div className="circleRegistered">
+                        <img src="/img/mercaderia.png" alt="Mercaderia" />
+                      </div>
+                      <label form="registered">Registrado</label>
                     </div>
-                    <label form="registered">Registrado</label>
-                  </div>
                   <div className="containerTrack">
                     <div className={`circleProcess ${isTimePassed(encomiendaHora) ? 'green' : ''}`}>
                       <img src="/img/transito.png" alt="En Transito" />
