@@ -6,28 +6,32 @@ import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "@/firebase/app";
 
+
+// Defining the PackageTracking functional component
 const PackageTracking: React.FC = () => {
   const [selectedEncomiendaId, setselectedEncomiendaId] = useState<string>("");
   const [part, setPart] = useState(false);
   const [showError, setShowError] = useState(false);
   const [encomiendaHora, setEncomiendaHora] = useState<Date | null>(null);
 
+  // Event handler for tracking code input change
   const handleRutaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setselectedEncomiendaId(event.target.value);
   };
 
+  // Event handler for tracking button click
   const handlerPart = async () => {
     const app = initializeApp(firebaseConfig);
     const database = getFirestore(app);
 
     const encomiendaRef = doc(database, "encomienda", selectedEncomiendaId);
-    const encomiendaSnapshot = await getDoc(encomiendaRef);
+    const parcelSnapshot = await getDoc(encomiendaRef);
 
-    if (encomiendaSnapshot.exists()) {
+    if (parcelSnapshot.exists()) {
       setPart(true);
       setShowError(false);
 
-      const encomiendaData = encomiendaSnapshot.data();
+      const encomiendaData = parcelSnapshot.data();
       const fecha = encomiendaData.fecha.toDate();
       setEncomiendaHora(fecha);
     } else {
@@ -36,6 +40,7 @@ const PackageTracking: React.FC = () => {
     }
   };
 
+  // Helper function to check if the time has passed
   const isTimePassed = (encomiendaHora: Date | null) => {
     if (!encomiendaHora) {
       return false;
@@ -105,4 +110,4 @@ const PackageTracking: React.FC = () => {
   );
 };
 
-export default PackageTracking;
+export default PackageTracking; // Exporting the PackageTracking component
