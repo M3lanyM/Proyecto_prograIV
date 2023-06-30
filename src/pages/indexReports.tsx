@@ -6,85 +6,85 @@ import DatePicker from "@/components/function/calendar";
 import Page_header from "@/components/page_header";
 import Tablereports from "@/components/function/reportsTable";
 
+const IndexReports = () => {
+  const [rutaOptions, setRutaOptions] = useState<string[]>([]);
+  const [selectedRuta, setSelectedRuta] = useState<string>("");
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-export default function indexReports() {
-    const [rutaOptions, setRutaOptions] = useState<string[]>([]);
-    const [selectedRuta, setSelectedRuta] = useState<string>("");
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  useEffect(() => {
+    const fetchRutaOptions = async () => {
+      const app = initializeApp(firebaseConfig);
+      const database = getFirestore(app);
 
-    useEffect(() => {
-        const fetchRutaOptions = async () => {
-            const app = initializeApp(firebaseConfig);
-            const database = getFirestore(app);
+      const rutareportdb = await getDocs(collection(database, "ruta"));
+      const rutareportData = rutareportdb.docs.map((doc) => doc.data().nombre);
 
-            const rutareportdb = await getDocs(collection(database, "ruta"));
-            const rutareportData = rutareportdb.docs.map((doc) => doc.data().nombre);
-
-            setRutaOptions(rutareportData);
-        };
-
-        fetchRutaOptions();
-    }, []);
-
-    const handleRutaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedRuta(event.target.value);
+      setRutaOptions(rutareportData);
     };
 
-    const handleDateChange = (date: Date | null) => {
-        setSelectedDate(date);
-    };
+    fetchRutaOptions();
+  }, []);
 
-    return (
-        <>
-            <header>
-                <Page_header />
-            </header>
+  const handleRutaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedRuta(event.target.value);
+  };
 
-            <nav className="nav-report">
-                <div>
-                    <h1 className="title-nav">
-                        Cierre de ventas
-                        <img className="nav-img" src="/img/movimientos.png" alt="error" />
-                    </h1>
-                </div>
-            </nav>
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+  };
 
-            <article>
-                <div className="labels-div">
-                    <label className="label1-report">Movimientos por fecha</label>
-                    <label className="label2-report">Movimientos por ruta</label>
-                </div>
+  return (
+    <>
+      <header>
+        <Page_header />
+      </header>
 
-                <div className="report-container">
-                    <DatePicker selectedDate={selectedDate} onDateChange={handleDateChange} />
+      <nav className="nav-report">
+        <div>
+          <h1 className="title-nav">
+            Cierre de ventas
+            <img className="nav-img" src="/img/movimientos.png" alt="error" />
+          </h1>
+        </div>
+      </nav>
 
-                    <select className="route-report" onChange={handleRutaChange}>
-                        <option value="">Selecciona una ruta</option>
-                        {rutaOptions.map((ruta) => (
-                            <option key={ruta} value={ruta}>
-                                {ruta}
-                            </option>
-                        ))}
-                    </select>
+      <article>
+        <div className="labels-div">
+          <label className="label1-report">Movimientos por fecha</label>
+          <label className="label2-report">Movimientos por ruta</label>
+        </div>
 
-                </div>
-            </article>
+        <div className="report-container">
+          <DatePicker selectedDate={selectedDate} onDateChange={handleDateChange} />
 
-            <section>
-                <Tablereports selectedRuta={selectedRuta} selectedDate={selectedDate} />
-            </section>
+          <select className="route-report" onChange={handleRutaChange}>
+            <option value="">Selecciona una ruta</option>
+            {rutaOptions.map((ruta) => (
+              <option key={ruta} value={ruta}>
+                {ruta}
+              </option>
+            ))}
+          </select>
+        </div>
+      </article>
 
-            <footer>
-                <div className="footer">
-                    <p className="inf-footer">
-                        Contactenos: <br />
-                        Correo electrónico: info@busesUNA.com<br />
-                        Teléfono: +1234567890<br />
-                        Dirección: Canoas, Puntarenas, Costa Rica.<br />
-                    </p>
-                    <h1 className="copyright">© 2023</h1>
-                </div>
-            </footer>
-        </>
-    );
-}
+      <section>
+        <Tablereports selectedRuta={selectedRuta} selectedDate={selectedDate} />
+      </section>
+
+      <footer>
+        <div className="footer">
+          <p className="inf-footer">
+            Contactenos: <br />
+            Correo electrónico: info@busesUNA.com<br />
+            Teléfono: +1234567890<br />
+            Dirección: Canoas, Puntarenas, Costa Rica.<br />
+          </p>
+          <h1 className="copyright">© 2023</h1>
+        </div>
+      </footer>
+    </>
+  );
+};
+
+export default IndexReports;
