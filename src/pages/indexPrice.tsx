@@ -93,8 +93,7 @@ export default function IndexPrice() {
             .catch((error) => {
                 console.error("Error al enviar los datos a Firebase:", error);
             });
-        alert("Se registro la encomienda")
-        window.location.reload();
+        
     };
 
     /*Personal*/

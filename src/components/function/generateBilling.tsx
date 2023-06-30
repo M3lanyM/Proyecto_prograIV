@@ -50,6 +50,8 @@ export const generatePDF = async (cod: string, hig: number, wig: number, all: nu
   // Descargar el archivo PDF
   const blob = new Blob([pdfBytes], { type: 'application/pdf' });
   saveAs(blob, 'factura.pdf');
+  alert("Se registro la encomienda")
+  window.location.reload();
 };
 
 
