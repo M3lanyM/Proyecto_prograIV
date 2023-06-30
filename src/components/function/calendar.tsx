@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
+//the interface for the properties of the DatePicker
 interface DatePickerProps {
   selectedDate: Date | null;
   onDateChange: (date: Date | null) => void;
 }
 
+//Control the change of date
 const DatePicker = ({ selectedDate, onDateChange }: DatePickerProps) => {
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const dateValue = event.target.value;

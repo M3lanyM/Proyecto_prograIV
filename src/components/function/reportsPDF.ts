@@ -5,6 +5,7 @@ const generatePDF = async (data: any[]) => {
   const pdfDoc = await PDFDocument.create();
   const page = pdfDoc.addPage();
 
+  // Define font size and fonts
   const titleFontSize = 20;
   const subtitleFontSize = 16;
   const columnFontSize = 12;
@@ -14,16 +15,15 @@ const generatePDF = async (data: any[]) => {
   const title = 'Reportes de Buses Universidad Nacional';
   const subtitle = 'Cierre de ventas';
 
-
+  //title position to draw
   const titleWidth = fontBold.widthOfTextAtSize(title, titleFontSize);
   const titleX = (page.getWidth() - titleWidth) / 2;
   let titleY = page.getHeight() - 50;
   page.drawText(title, { x: titleX, y: titleY, size: titleFontSize, font: fontBold });
 
-
+  //subtitle position to draw
   const spaceAfterTitle = 15;
   titleY -= spaceAfterTitle;
-
 
   const subtitleColor = rgb(0, 0, 1);
   const subtitleX = 50;
@@ -38,6 +38,7 @@ const generatePDF = async (data: any[]) => {
 
   const columnSpacing = 117;
 
+  // Draw the column headers
   page.drawText('Fecha', { x, y, size: columnFontSize, font: fontBold });
   x += columnSpacing;
   page.drawText('Ruta', { x, y, size: columnFontSize, font: fontBold });
@@ -49,7 +50,7 @@ const generatePDF = async (data: any[]) => {
   x = 50;
   y -= 20;
 
-
+  // Draw the data in the columns
   for (const item of data) {
     page.drawText(item.fecha.toLocaleDateString(), { x, y, size: columnFontSize, font: fontRegular });
     x += columnSpacing;
@@ -63,6 +64,7 @@ const generatePDF = async (data: any[]) => {
     y -= 20;
   }
 
+  //Save and Download the PDF file
   const pdfBytes = await pdfDoc.save();
   const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
 

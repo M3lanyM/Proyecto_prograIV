@@ -11,24 +11,29 @@ const IndexReports = () => {
   const [selectedRuta, setSelectedRuta] = useState<string>("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
+  //here get the route options from the database
   useEffect(() => {
     const fetchRutaOptions = async () => {
       const app = initializeApp(firebaseConfig);
       const database = getFirestore(app);
-
+      //I consult the "route" collection
       const rutareportdb = await getDocs(collection(database, "ruta"));
+      //I map the documents to extract the name of the routes 
       const rutareportData = rutareportdb.docs.map((doc) => doc.data().nombre);
 
+      //update the routeOptions with the obtained data
       setRutaOptions(rutareportData);
     };
 
     fetchRutaOptions();
   }, []);
 
+  //updates the selectedRoute states when a route is selected in the component
   const handleRutaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRuta(event.target.value);
   };
 
+  //updates the selectedDate when a date is selected in the component
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
   };

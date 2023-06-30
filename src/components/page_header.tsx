@@ -45,7 +45,7 @@ const PageHeader = () => {
         <div className="modal-about">
           <div className="content-about">
             <span className="close" onClick={handleCloseModal}>&times;</span>
-            <img src="/img/bus.gif" alt="Logo de Buses Universidad Nacional" />
+            <img src="/img/bus.gif" alt="error" />
             <h2>Acerca de Buses Universidad Nacional</h2>
             <p>
               Buses Universidad Nacional es una empresa líder en el envío de encomiendas a nivel nacional.
@@ -64,14 +64,18 @@ const PageHeader = () => {
         <div className="modal-contact">
           <div className="content-contact">
             <span className="close" onClick={handleCloseContactModal}>&times;</span>
-            <h2>Contacto</h2>
+            <img src="/img/contacto.png" alt="error" />
+            <h2>Contactos de Buses Universidad Nacional</h2>
             <p>
-              Horario de atención: de lunes a viernes de 7am a 6pm para atender consultas.<br />
+              Horario de atención: lunes a viernes de 7:00am a 6:00pm.<br />
               Ubicación física: H4FH+82P, 2, Puntarenas Province, Corredores<br />
               Correo electrónico: info@busesUNA.com<br />
               Teléfono: +1234567890
+              
             </p>
-            <p>Texto de contacto adicional...</p>
+            <p className='text-contact'>Nos encantaría tener la oportunidad de atenderle. 
+              Si necesita más detalles sobre nuestros servicios, tarifas o cualquier otra consulta, 
+              no dude en comunicarse con nosotros.¡Estamos a su disposición!</p>
           </div>
         </div>
       )}

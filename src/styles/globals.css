@@ -308,8 +308,31 @@ body {
 .content-contact {
   position: relative;
   padding: 2%;
-  max-width: 400px;
+  max-width: 480px;
   background-color: white;
   border-radius: 8px;
-  text-align: center;
+  text-align: left;
+}
+
+.content-contact h2 {
+  font-size: 19px;
+  margin-bottom: 10px;
+  color: #3BD9C9;
+  font-weight: bold;
+  text-align: justify;
+}
+
+.text-contact {
+  font-size: 15px;
+  margin-top: 10px;
+  color: black;
+  font-weight: bold;
+  text-align: justify;
+}
+
+.content-contact img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 2%;
+  margin-left: 39%;
 }

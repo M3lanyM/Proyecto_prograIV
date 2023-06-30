@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 import firebaseConfig from "@/firebase/app";
 import generatePDF from "@/components/function/reportsPDF";
 
+//interfaces for the data types used
 interface ReportData {
     id: string;
     fecha: Date;
@@ -34,18 +35,21 @@ const Tablereports = ({ selectedRuta, selectedDate }: TablereportsProps) => {
             const database = getFirestore(app);
 
             try {
-                const [encomiendaSnapshot, rutaSnapshot, destinatarioDocs] = await Promise.all([
+                // Get the documents from the collections parcel, route and recipient
+                const [encomiendastored, rutastored, destinatarioDocs] = await Promise.all([
                     getDocs(collection(database, "encomienda")),
                     getDocs(collection(database, "ruta")),
                     getDocs(collection(database, "destinatario"))
                 ]);
 
-                const rutaData: RutaData = rutaSnapshot.docs.reduce((acc, doc) => {
+                // get the route names
+                const rutaData: RutaData = rutastored.docs.reduce((acc, doc) => {
                     const rutaId = doc.id;
                     const rutaNombre = doc.data().nombre;
                     return { ...acc, [rutaId]: rutaNombre };
                 }, {});
 
+                // get recipient names
                 const destinatarioData: DestinatarioData = destinatarioDocs.docs.reduce((acc, doc) => {
                     const destinatarioId = doc.id;
                     const destinatarioNombre = doc.data().nombre;
@@ -54,14 +58,18 @@ const Tablereports = ({ selectedRuta, selectedDate }: TablereportsProps) => {
                     return { ...acc, [destinatarioId]: nombreCompleto };
                 }, {});
 
-                const reportsData: Promise<ReportData>[] = encomiendaSnapshot.docs.map(async (doc) => {
+                //it goes through the documents because for each document
+                //it obtains the data of the parcel and the data of the recipient's document.
+                const reportsData: Promise<ReportData>[] = encomiendastored.docs.map(async (doc) => {
                     const encomiendaData = doc.data();
                     const rutaId = encomiendaData.ruta.id;
 
                     const destinatarioRef: DocumentReference = encomiendaData.destinatario;
                     const destinatarioDoc: DocumentSnapshot<DocumentData> = await getDoc(destinatarioRef);
 
+                    //stores the full name of the recipient
                     let destinatarioNombreCompleto = '';
+                    //stores the full name of the recipient
                     if (destinatarioDoc.exists()) {
                         const destinatarioId = destinatarioDoc.id;
                         destinatarioNombreCompleto = destinatarioData[destinatarioId];
@@ -77,7 +85,7 @@ const Tablereports = ({ selectedRuta, selectedDate }: TablereportsProps) => {
                 });
 
                 const reportsDataWithDestinatario = await Promise.all(reportsData);
-
+                // Filter the data based on the selected route and date
                 const filteredData = selectedRuta
                     ? reportsDataWithDestinatario.filter(
                         (item) =>
@@ -87,7 +95,7 @@ const Tablereports = ({ selectedRuta, selectedDate }: TablereportsProps) => {
                     : reportsDataWithDestinatario.filter(
                         (item) => !selectedDate || item.fecha.toDateString() === selectedDate.toDateString()
                     );
-
+                // update with the filtered data
                 setFilteredReportsData(filteredData);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -98,6 +106,7 @@ const Tablereports = ({ selectedRuta, selectedDate }: TablereportsProps) => {
         fetchData();
     }, [selectedRuta, selectedDate]);
 
+    //PDF generation
     const handleGeneratePDF = () => {
         generatePDF(filteredReportsData);
     };
